@@ -1,6 +1,7 @@
 import ExploreCategories from "./(pages)/Home/ExploreCategories";
 import FeaturedAssets from "./(pages)/Home/FeaturedAssets";
 import HomepageCarousel from "./(pages)/Home/HomepageCarousel";
+import TechStack from "./(pages)/Home/TechStack";
 import WhySkinylabs from "./(pages)/Home/WhySkinylabs";
 
 export default function Home() {
@@ -8,8 +9,9 @@ export default function Home() {
     <main>
       <HomepageCarousel />
       <ExploreCategories />
-      <FeaturedAssets />
+      {/* <FeaturedAssets /> */}
       <WhySkinylabs />
+      <TechStack />
     </main>
   );
 }

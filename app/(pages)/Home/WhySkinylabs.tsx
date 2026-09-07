@@ -1,13 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
-
-import TechStack from "./TechStack";
-
-/* =========================================================
-   CONTENT
-========================================================= */
+import {
+  ArrowUpRight,
+  Lightbulb,
+  Layers3,
+  UsersRound,
+  Shapes,
+} from "lucide-react";
 
 const benefits = [
   {
@@ -15,517 +15,268 @@ const benefits = [
     title: "Built around ideas",
     description:
       "From the first concept to the final experience, every detail starts with the idea.",
+    icon: Lightbulb,
+    position: "lg:translate-y-8",
+    accent: "bg-[#FF6B57]",
+    soft: "bg-[#FFF0ED]",
   },
   {
     number: "02",
     title: "Design meets technology",
     description:
       "Creative direction and engineering work together to build digital products that feel right.",
+    icon: Layers3,
+    position: "lg:-translate-y-4",
+    accent: "bg-[#6C63FF]",
+    soft: "bg-[#F0EFFF]",
   },
   {
     number: "03",
     title: "Made for real users",
     description:
       "Clear interfaces, thoughtful interactions, and reliable technology built around people.",
+    icon: UsersRound,
+    position: "lg:translate-y-14",
+    accent: "bg-[#35BFA4]",
+    soft: "bg-[#E9FAF6]",
   },
   {
     number: "04",
     title: "Flexible by nature",
     description:
       "Websites, digital products, visual content, and creative work — shaped around your needs.",
+    icon: Shapes,
+    position: "lg:translate-y-1",
+    accent: "bg-[#F4C430]",
+    soft: "bg-[#FFF8DD]",
   },
 ];
 
-/* =========================================================
-   SECTION LABEL
-========================================================= */
-
-function SectionLabel({
-  eyebrow,
-  number,
+function Benefit({
+  benefit,
+  index,
 }: {
-  eyebrow: string;
-  number: string;
+  benefit: (typeof benefits)[number];
+  index: number;
 }) {
+  const Icon = benefit.icon;
+
   return (
-    <div className="flex items-center gap-2.5 sm:gap-3">
-      <span
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.07,
+        ease: "easeOut",
+      }}
+      className={`
+        group relative
+        ${benefit.position}
+      `}
+    >
+      <div
         className="
-          font-mono
-          text-[9px] sm:text-[10px]
-          font-medium
-          tracking-[0.16em]
-          text-slate-300
+          relative overflow-hidden
+          rounded-[28px]
+          border border-slate-200
+          bg-white
+          p-6
+          transition-all duration-500
+          hover:-translate-y-2
+          hover:border-slate-300
         "
       >
-        {number}
-      </span>
+        {/* Decorative shape */}
+        <div
+          className={`
+            absolute -right-12 -top-12
+            h-32 w-32
+            rounded-full
+            opacity-0
+            transition-all duration-500
+            group-hover:scale-125
+            group-hover:opacity-100
+            ${benefit.soft}
+          `}
+        />
 
-      <span className="h-px w-6 bg-slate-200 sm:w-8" />
+        {/* Header */}
+        <div className="relative flex items-center justify-between">
+          <span className="font-mono text-[10px] font-medium tracking-[0.14em] text-slate-300">
+            {benefit.number}
+          </span>
 
-      <span
-        className="
-          text-[9px] sm:text-[10px]
-          font-semibold
-          uppercase
-          tracking-[0.18em] sm:tracking-[0.22em]
-          text-slate-400
-        "
-      >
-        {eyebrow}
-      </span>
-    </div>
+          <ArrowUpRight
+            size={15}
+            strokeWidth={1.5}
+            className="
+              text-slate-300
+              transition-all duration-300
+              group-hover:-translate-y-1
+              group-hover:translate-x-1
+              group-hover:text-slate-900
+            "
+          />
+        </div>
+
+        {/* Icon */}
+        <div className="relative mt-10">
+          <div
+            className={`
+              flex h-12 w-12
+              items-center justify-center
+              rounded-[16px]
+              text-white
+              transition-all duration-500
+              group-hover:rotate-6
+              group-hover:scale-110
+              ${benefit.accent}
+            `}
+          >
+            <Icon size={20} strokeWidth={1.7} />
+          </div>
+        </div>
+
+        {/* Text */}
+        <div className="relative mt-7">
+          <h3 className="text-[16px] font-semibold tracking-[-0.025em] text-slate-950">
+            {benefit.title}
+          </h3>
+
+          <p className="mt-2 max-w-[260px] text-[11px] leading-[1.7] text-slate-400">
+            {benefit.description}
+          </p>
+        </div>
+
+        {/* Accent */}
+        <div
+          className={`
+            absolute bottom-0 left-6
+            h-[3px] w-0
+            transition-all duration-500
+            group-hover:w-10
+            ${benefit.accent}
+          `}
+        />
+      </div>
+    </motion.article>
   );
 }
-
-/* =========================================================
-   MAIN
-========================================================= */
 
 export default function WhySkinylabs() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section
-      className="
-        w-full
-        overflow-hidden
-        pt-16
-        pb-14
-        xs:pt-20
-        xs:pb-16
-        sm:pt-20
-        sm:pb-20
-        md:pt-24
-        md:pb-24
-        lg:pt-28
-        lg:pb-28
-      "
-    >
-      <div
-        className="
-          mx-auto
-          w-full
-          max-w-7xl
-          px-4
-          xs:px-5
-          sm:px-6
-          lg:px-8
-        "
-      >
-        {/* =================================================
-            WHY SKINYLABS
-        ================================================= */}
+    <section className="relative w-full overflow-hidden bg-[#F8F7F3] py-24 md:py-32 lg:py-40">
+      {/* Background details */}
+      <div className="pointer-events-none absolute left-[8%] top-[15%] h-2 w-2 rounded-full bg-[#FF6B57]" />
 
-        <div
-          className="
-            grid
-            items-start
-            gap-8
-            border-t border-slate-200
-            pt-7
-            sm:gap-10
-            sm:pt-8
-            md:gap-12
-            lg:grid-cols-[0.30fr_0.70fr]
-            lg:gap-16
-            lg:pt-9
-            xl:gap-20
-          "
+      <div className="pointer-events-none absolute right-[12%] top-[28%] h-1.5 w-1.5 rounded-full bg-slate-300" />
+
+      <div className="pointer-events-none absolute bottom-[15%] left-[18%] h-1.5 w-1.5 rounded-full bg-slate-300" />
+
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        {/* =====================================================
+            INTRO
+        ====================================================== */}
+
+        <motion.div
+          initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{
+            duration: 0.6,
+            ease: "easeOut",
+          }}
+          className="max-w-4xl"
         >
-          {/* TITLE */}
+          <div className="mb-6 flex items-center gap-3">
+            <span className="font-mono text-[10px] font-medium tracking-[0.16em] text-slate-300">
+              01
+            </span>
 
-          <motion.div
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
-            whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{
-              once: true,
-              amount: 0.4,
-            }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            className="
-              min-w-0
-              lg:sticky
-              lg:top-28
-            "
-          >
-            <SectionLabel eyebrow="Why Skinylabs" number="01" />
+            <span className="h-px w-8 bg-slate-200" />
 
-            <h2
-              className="
-                mt-5
-                max-w-[280px]
-                text-[30px]
-                font-semibold
-                leading-[0.98]
-                tracking-[-0.045em]
-                text-slate-950
-                xs:text-[33px]
-                sm:mt-6
-                sm:text-[38px]
-                md:text-[42px]
-                lg:text-[46px]
-                xl:text-[50px]
-              "
-            >
-              Ideas deserve
-              <br />
-              <span className="text-slate-400">better execution.</span>
-            </h2>
-
-            <p
-              className="
-                mt-4
-                max-w-[290px]
-                text-[11px]
-                leading-5
-                text-slate-400
-                sm:mt-5
-                sm:text-[12px]
-                sm:leading-6
-              "
-            >
-              We combine design, technology, and creative production to turn
-              ideas into digital experiences people want to use.
-            </p>
-          </motion.div>
-
-          {/* CONTENT */}
-
-          <div className="min-w-0">
-            <div
-              className="
-                grid
-                overflow-hidden
-                rounded-[20px]
-                xs:rounded-[24px]
-                border border-slate-200
-                bg-white
-                sm:grid-cols-2
-              "
-            >
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={benefit.number}
-                  initial={
-                    shouldReduceMotion ? undefined : { opacity: 0, y: 14 }
-                  }
-                  whileInView={
-                    shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
-                  }
-                  viewport={{
-                    once: true,
-                    amount: 0.2,
-                  }}
-                  transition={{
-                    duration: 0.45,
-                    delay: index * 0.05,
-                    ease: "easeOut",
-                  }}
-                  className="
-                    group
-                    relative
-                    min-h-[145px]
-                    border-slate-100
-                    p-4
-                    transition-colors
-                    duration-300
-                    hover:bg-slate-50/70
-                    xs:min-h-[155px]
-                    xs:p-5
-                    sm:min-h-[175px]
-                    sm:p-6
-                  "
-                >
-                  <div className="flex items-start justify-between">
-                    <span
-                      className="
-                        font-mono
-                        text-[9px]
-                        font-medium
-                        tracking-[0.12em]
-                        text-slate-300
-                        transition-colors
-                        group-hover:text-slate-500
-                      "
-                    >
-                      {benefit.number}
-                    </span>
-
-                    <ArrowUpRight
-                      size={13}
-                      strokeWidth={1.5}
-                      className="
-                        text-slate-300
-                        opacity-0
-                        transition-all
-                        duration-300
-                        group-hover:-translate-y-0.5
-                        group-hover:translate-x-0.5
-                        group-hover:text-slate-600
-                        group-hover:opacity-100
-                      "
-                    />
-                  </div>
-
-                  <div
-                    className="
-                      mt-8
-                      xs:mt-9
-                      sm:mt-11
-                    "
-                  >
-                    <h3
-                      className="
-                        text-[12px]
-                        font-medium
-                        tracking-[-0.01em]
-                        text-slate-900
-                        sm:text-[13px]
-                      "
-                    >
-                      {benefit.title}
-                    </h3>
-
-                    <p
-                      className="
-                        mt-1.5
-                        max-w-[300px]
-                        text-[10px]
-                        leading-[1.65]
-                        text-slate-400
-                        sm:text-[11px]
-                      "
-                    >
-                      {benefit.description}
-                    </p>
-                  </div>
-
-                  <span
-                    className="
-                      pointer-events-none
-                      absolute
-                      bottom-0
-                      left-4
-                      h-px
-                      w-0
-                      bg-slate-900
-                      transition-all
-                      duration-500
-                      group-hover:w-8
-                      xs:left-5
-                      sm:left-6
-                    "
-                  />
-                </motion.div>
-              ))}
-            </div>
-
-            <div
-              className="
-                mt-4
-                flex
-                items-center
-                gap-2.5
-                text-[9px]
-                text-slate-300
-                sm:mt-5
-                sm:text-[10px]
-              "
-            >
-              <span className="h-1 w-1 rounded-full bg-slate-300" />
-              <span>From concept to experience</span>
-            </div>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+              Why Skinylabs
+            </span>
           </div>
-        </div>
 
-        {/* =================================================
-            TOOLKIT
-        ================================================= */}
+          <h2 className="text-[48px] font-semibold leading-[0.92] tracking-[-0.065em] text-slate-950 sm:text-[64px] md:text-[78px] lg:text-[92px]">
+            Ideas deserve
+            <br />
+            <span className="text-slate-400">better execution.</span>
+          </h2>
 
-        <div
-          className="
-            mt-16
-            grid
-            items-start
-            gap-8
-            border-t border-slate-200
-            pt-7
-            sm:mt-20
-            sm:gap-10
-            sm:pt-8
-            md:mt-24
-            md:gap-12
-            lg:grid-cols-[0.30fr_0.70fr]
-            lg:gap-16
-            lg:pt-9
-            xl:gap-20
-          "
-        >
-          {/* TITLE */}
-
-          <motion.div
-            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
-            whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{
-              once: true,
-              amount: 0.4,
-            }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            className="
-              min-w-0
-              lg:sticky
-              lg:top-28
-            "
-          >
-            <SectionLabel eyebrow="Our toolkit" number="02" />
-
-            <h2
-              className="
-                mt-5
-                max-w-[280px]
-                text-[30px]
-                font-semibold
-                leading-[0.98]
-                tracking-[-0.045em]
-                text-slate-950
-                xs:text-[33px]
-                sm:mt-6
-                sm:text-[38px]
-                md:text-[42px]
-                lg:text-[46px]
-                xl:text-[50px]
-              "
-            >
-              Design meets
-              <br />
-              <span className="text-slate-400">technology.</span>
-            </h2>
-
-            <p
-              className="
-                mt-4
-                max-w-[290px]
-                text-[11px]
-                leading-5
-                text-slate-400
-                sm:mt-5
-                sm:text-[12px]
-                sm:leading-6
-              "
-            >
-              A carefully selected stack for building fast websites, digital
-              products, and creative experiences.
+          <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <p className="max-w-md text-[12px] leading-6 text-slate-400">
+              We bring design, technology, and creative production together to
+              turn ideas into digital experiences people want to use.
             </p>
 
-            <div
-              className="
-                mt-6
-                hidden
-                border-l
-                border-slate-200
-                pl-4
-                lg:block
-              "
-            >
-              <p
-                className="
-                  text-[9px]
-                  font-medium
-                  uppercase
-                  tracking-[0.16em]
-                  text-slate-300
-                "
-              >
-                Selected tools
-              </p>
-
-              <p
-                className="
-                  mt-1.5
-                  text-[10px]
-                  leading-5
-                  text-slate-400
-                "
-              >
-                The stack evolves. The standard stays high.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* CONTENT */}
-
-          <div className="min-w-0">
-            <TechStack />
-
-            <div
-              className="
-                mt-4
-                flex
-                flex-col
-                gap-3
-                border-t
-                border-slate-200
-                pt-4
-                sm:mt-5
-                sm:flex-row
-                sm:items-center
-                sm:justify-between
-                sm:pt-5
-              "
-            >
-              <p
-                className="
-                  max-w-sm
-                  text-[9px]
-                  leading-5
-                  text-slate-400
-                  sm:text-[10px]
-                "
-              >
-                The tools may evolve. The focus stays the same — creating better
-                digital experiences.
-              </p>
-
-              <a
-                href="/about"
-                className="
-                  group
-                  flex
-                  shrink-0
-                  items-center
-                  gap-1.5
-                  self-start
-                  text-[10px]
-                  font-medium
-                  text-slate-600
-                  transition-colors
-                  hover:text-slate-950
-                  sm:self-auto
-                  sm:text-[11px]
-                "
-              >
-                Our approach
-                <ArrowUpRight
-                  size={12}
-                  strokeWidth={1.6}
-                  className="
-                    transition-transform
-                    duration-300
-                    group-hover:-translate-y-0.5
-                    group-hover:translate-x-0.5
-                  "
-                />
-              </a>
-            </div>
+            <span className="hidden font-mono text-[10px] tracking-[0.12em] text-slate-300 sm:block">
+              DESIGN × TECHNOLOGY × CREATIVITY
+            </span>
           </div>
+        </motion.div>
+
+        {/* =====================================================
+            BENEFITS
+        ====================================================== */}
+
+        <div className="mt-16 grid gap-3 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:items-start">
+          {benefits.map((benefit, index) => (
+            <Benefit key={benefit.number} benefit={benefit} index={index} />
+          ))}
         </div>
+
+        {/* =====================================================
+            CLOSING STATEMENT
+        ====================================================== */}
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mt-20 flex flex-col gap-5 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-28"
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-2 w-2 rounded-full bg-[#FF6B57]" />
+
+            <span className="text-[10px] text-slate-400">
+              From concept to experience
+            </span>
+          </div>
+
+          <a
+            href="/about"
+            className="
+              group flex items-center gap-2
+              text-[11px] font-medium text-slate-600
+              transition-colors
+              hover:text-slate-950
+            "
+          >
+            Our approach
+            <span
+              className="
+                flex h-7 w-7 items-center justify-center
+                rounded-full border border-slate-200
+                transition-all duration-300
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+                group-hover:border-slate-900
+                group-hover:bg-slate-900
+                group-hover:text-white
+              "
+            >
+              <ArrowUpRight size={13} />
+            </span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

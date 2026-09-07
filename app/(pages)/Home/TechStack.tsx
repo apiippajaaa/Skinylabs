@@ -1,408 +1,1191 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import {
+  ArrowUpRight,
+  Sparkles,
+  Palette,
+  Code2,
+  BrainCircuit,
+  Layers3,
+} from "lucide-react";
 import Image from "next/image";
 
-/* =========================================================
-   SKILL ICONS
-========================================================= */
-
-type SkillIcon =
-  | "nextjs"
-  | "react"
-  | "ts"
-  | "tailwind"
-  | "laravel"
-  | "figma"
-  | "nodejs"
-  | "php"
-  | "mysql"
-  | "postgres"
-  | "supabase"
-  | "vercel"
-  | "git"
-  | "docker"
-  | "vite"
-  | "ps"
-  | "ae"
-  | "pr";
-
-type Technology = {
+type Tool = {
   name: string;
-  icon: SkillIcon;
-  orbit: 1 | 2 | 3;
-  angle: number;
+  icon: string;
+  x: number;
+  y: number;
+  accent: string;
+  rotate?: string;
 };
 
-const technologies: Technology[] = [
-  { name: "Next.js", icon: "nextjs", orbit: 1, angle: 0 },
-  { name: "React", icon: "react", orbit: 1, angle: 60 },
-  { name: "TypeScript", icon: "ts", orbit: 1, angle: 120 },
-  { name: "Tailwind CSS", icon: "tailwind", orbit: 1, angle: 180 },
-  { name: "Laravel", icon: "laravel", orbit: 1, angle: 240 },
-  { name: "Figma", icon: "figma", orbit: 1, angle: 300 },
-
-  { name: "Node.js", icon: "nodejs", orbit: 2, angle: 0 },
-  { name: "PHP", icon: "php", orbit: 2, angle: 72 },
-  { name: "MySQL", icon: "mysql", orbit: 2, angle: 144 },
-  { name: "PostgreSQL", icon: "postgres", orbit: 2, angle: 216 },
-  { name: "Supabase", icon: "supabase", orbit: 2, angle: 288 },
-
-  { name: "Git", icon: "git", orbit: 3, angle: 0 },
-  { name: "Docker", icon: "docker", orbit: 3, angle: 90 },
-  { name: "Vite", icon: "vite", orbit: 3, angle: 180 },
-  { name: "After Effects", icon: "ae", orbit: 3, angle: 270 },
+const creativeTools: Tool[] = [
+  {
+    name: "Adobe",
+    icon: "https://cdn.simpleicons.org/adobe/FF0000",
+    x: 14.64,
+    y: 14.64,
+    accent: "bg-[#FFF0ED]",
+    rotate: "-rotate-3",
+  },
+  {
+    name: "CorelDRAW",
+    icon: "https://cdn.simpleicons.org/coreldraw/44A148",
+    x: 85.36,
+    y: 14.64,
+    accent: "bg-[#E9FAF6]",
+    rotate: "rotate-3",
+  },
+  {
+    name: "Figma",
+    icon: "https://cdn.simpleicons.org/figma/F24E1E",
+    x: 14.64,
+    y: 85.36,
+    accent: "bg-[#F0EFFF]",
+    rotate: "rotate-2",
+  },
+  {
+    name: "Premiere Pro",
+    icon: "https://cdn.simpleicons.org/adobepremierepro/9999FF",
+    x: 85.36,
+    y: 85.36,
+    accent: "bg-[#F0EFFF]",
+    rotate: "-rotate-2",
+  },
+  {
+    name: "After Effects",
+    icon: "https://cdn.simpleicons.org/adobeaftereffects/9999FF",
+    x: 50,
+    y: 0,
+    accent: "bg-[#FFF8DD]",
+    rotate: "rotate-3",
+  },
+  {
+    name: "DaVinci Resolve",
+    icon: "https://cdn.simpleicons.org/davinciresolve/233A51",
+    x: 50,
+    y: 100,
+    accent: "bg-[#EAF2FF]",
+    rotate: "-rotate-3",
+  },
 ];
 
-const SKILL_ICON_BASE = "https://skillicons.dev/icons";
+const frontendTools: Tool[] = [
+  {
+    name: "React",
+    icon: "https://cdn.simpleicons.org/react/61DAFB",
+    x: 0,
+    y: 50,
+    accent: "bg-[#EAF2FF]",
+  },
+  {
+    name: "Next.js",
+    icon: "https://cdn.simpleicons.org/nextdotjs/000000",
+    x: 100,
+    y: 50,
+    accent: "bg-[#F1F1F1]",
+  },
+  {
+    name: "TypeScript",
+    icon: "https://cdn.simpleicons.org/typescript/3178C6",
+    x: 50,
+    y: 100,
+    accent: "bg-[#EAF2FF]",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4",
+    x: 50,
+    y: 0,
+    accent: "bg-[#E9FAF6]",
+  },
+];
 
-function getSkillIconUrl(icon: SkillIcon) {
-  return `${SKILL_ICON_BASE}?i=${icon}&theme=light`;
-}
+const backendTools: Tool[] = [
+  {
+    name: "Laravel",
+    icon: "https://cdn.simpleicons.org/laravel/FF2D20",
+    x: 100,
+    y: 50,
+    accent: "bg-[#FFF0ED]",
+  },
+  {
+    name: "Node.js",
+    icon: "https://cdn.simpleicons.org/nodedotjs/339933",
+    x: 75,
+    y: 6.7,
+    accent: "bg-[#E9FAF6]",
+  },
+  {
+    name: "OpenAI",
+    icon: "https://cdn.simpleicons.org/openai/000000",
+    x: 25,
+    y: 6.7,
+    accent: "bg-[#F1F1F1]",
+  },
+  {
+    name: "Python",
+    icon: "https://cdn.simpleicons.org/python/3776AB",
+    x: 0,
+    y: 50,
+    accent: "bg-[#FFF8DD]",
+  },
+  {
+    name: "Groq",
+    icon: "https://cdn.simpleicons.org/groq/F55036",
+    x: 25,
+    y: 93.3,
+    accent: "bg-[#FFF8DD]",
+  },
+  {
+    name: "PostgreSQL",
+    icon: "https://cdn.simpleicons.org/postgresql/4169E1",
+    x: 75,
+    y: 93.3,
+    accent: "bg-[#EAF2FF]",
+  },
+];
 
-/* =========================================================
-   TECH NODE
-========================================================= */
+const categories = [
+  {
+    label: "Creative",
+    count: "06",
+    icon: Palette,
+    description: "Visual design & motion",
+    iconClass: "text-[#E85D9E]",
+    bgClass: "bg-[#FDF0F7]",
+  },
+  {
+    label: "Frontend",
+    count: "04",
+    icon: Code2,
+    description: "Interfaces & experiences",
+    iconClass: "text-[#6C63FF]",
+    bgClass: "bg-[#F0EFFF]",
+  },
+  {
+    label: "Backend + AI",
+    count: "06",
+    icon: BrainCircuit,
+    description: "Systems & intelligence",
+    iconClass: "text-[#FF6B57]",
+    bgClass: "bg-[#FFF0ED]",
+  },
+];
 
-function TechNode({ tech }: { tech: Technology }) {
-  return (
-    <div
-      className="
-        group relative flex
-        h-9 w-9
-        xs:h-10 xs:w-10
-        sm:h-11 sm:w-11
-        shrink-0 items-center justify-center
-        rounded-[11px] xs:rounded-[13px]
-        border border-slate-200/80
-        bg-white/95
-        shadow-[0_3px_12px_rgba(15,23,42,0.05)]
-        backdrop-blur-sm
-        transition-all duration-300
-        hover:scale-110
-        hover:border-slate-300
-        hover:shadow-[0_12px_30px_rgba(15,23,42,0.10)]
-      "
-      aria-label={tech.name}
-    >
-      <img
-        src={getSkillIconUrl(tech.icon)}
-        alt=""
-        width={28}
-        height={28}
-        loading="lazy"
-        decoding="async"
-        draggable={false}
-        className="
-          h-6 w-6
-          xs:h-7 xs:w-7
-          select-none object-contain
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none absolute left-1/2 top-full z-50 mt-2
-          -translate-x-1/2 translate-y-1
-          whitespace-nowrap rounded-lg
-          border border-slate-200 bg-white
-          px-2 py-1
-          text-[8px] xs:text-[9px]
-          font-medium tracking-tight text-slate-600
-          opacity-0
-          shadow-lg shadow-slate-900/[0.06]
-          transition-all duration-200
-          group-hover:translate-y-0
-          group-hover:opacity-100
-        "
-      >
-        {tech.name}
-      </div>
-    </div>
-  );
-}
-
-/* =========================================================
-   ORBIT
-========================================================= */
-
-type OrbitProps = {
-  size: number;
-  radius: number;
-  duration: number;
-  direction: 1 | -1;
-  technologies: Technology[];
-  shouldReduceMotion: boolean | null;
-  dashed?: boolean;
-};
-
-function Orbit({
-  size,
-  radius,
+function ToolNode({
+  tool,
+  index,
+  reverse,
   duration,
-  direction,
-  technologies,
-  shouldReduceMotion,
-  dashed = false,
-}: OrbitProps) {
-  const rotation = direction === 1 ? { rotate: 360 } : { rotate: -360 };
-
-  const counterRotation = direction === 1 ? { rotate: -360 } : { rotate: 360 };
+  reduceMotion,
+}: {
+  tool: Tool;
+  index: number;
+  reverse: boolean;
+  duration: number;
+  reduceMotion: boolean;
+}) {
+  const counterRotation = reverse ? 360 : -360;
 
   return (
     <motion.div
-      aria-hidden="true"
-      className={`
-        absolute left-1/2 top-1/2
-        -translate-x-1/2 -translate-y-1/2
-        rounded-full border
-        ${dashed ? "border-dashed border-slate-200/70" : "border-slate-200/70"}
-      `}
+      className="
+        absolute
+        z-20
+        -translate-x-1/2
+        -translate-y-1/2
+      "
       style={{
-        width: size,
-        height: size,
+        left: `${tool.x}%`,
+        top: `${tool.y}%`,
       }}
-      animate={shouldReduceMotion ? undefined : rotation}
+      initial={{
+        opacity: 0,
+        scale: 0.7,
+      }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.45,
+        delay: index * 0.045,
+        ease: "easeOut",
+      }}
+    >
+      <motion.div
+        animate={
+          reduceMotion
+            ? undefined
+            : {
+                rotate: [0, counterRotation],
+              }
+        }
+        transition={{
+          duration,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        <motion.div
+          animate={
+            reduceMotion
+              ? undefined
+              : {
+                  y: [0, -3, 0],
+                }
+          }
+          transition={{
+            duration: 4 + index * 0.35,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="group relative"
+        >
+          <div
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              top-full
+              z-50
+              mt-2
+              -translate-x-1/2
+              translate-y-1
+              whitespace-nowrap
+              rounded-full
+              border
+              border-slate-200
+              bg-white
+              px-3
+              py-1.5
+              text-[9px]
+              font-medium
+              text-slate-700
+              opacity-0
+              shadow-[0_8px_24px_rgba(15,23,42,0.08)]
+              transition-all
+              duration-300
+              group-hover:translate-y-0
+              group-hover:opacity-100
+            "
+          >
+            {tool.name}
+          </div>
+
+          <div
+            className={`
+              relative
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-[13px]
+              border
+              border-white
+              shadow-[0_6px_22px_rgba(15,23,42,0.08)]
+              transition-all
+              duration-300
+              group-hover:scale-110
+              group-hover:shadow-[0_12px_30px_rgba(15,23,42,0.12)]
+              sm:h-[42px]
+              sm:w-[42px]
+              ${tool.accent}
+              ${tool.rotate ?? ""}
+            `}
+          >
+            <div
+              className="
+                pointer-events-none
+                absolute
+                inset-[1px]
+                rounded-[12px]
+                border
+                border-black/[0.025]
+              "
+            />
+
+            <img
+              src={tool.icon}
+              alt={tool.name}
+              width={20}
+              height={20}
+              loading="lazy"
+              draggable={false}
+              className="
+                relative
+                h-4.75
+                w-4.75
+                object-contain
+              "
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function Orbit({
+  tools,
+  size,
+  duration,
+  reverse = false,
+  dashed = false,
+  subtle = false,
+}: {
+  tools: Tool[];
+  size: string;
+  duration: number;
+  reverse?: boolean;
+  dashed?: boolean;
+  subtle?: boolean;
+}) {
+  const shouldReduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      animate={
+        shouldReduceMotion
+          ? undefined
+          : {
+              rotate: reverse ? [0, -360] : [0, 360],
+            }
+      }
       transition={{
         duration,
         repeat: Infinity,
         ease: "linear",
       }}
+      className={`
+        absolute
+        left-1/2
+        top-1/2
+        aspect-square
+        -translate-x-1/2
+        -translate-y-1/2
+        rounded-full
+        ${size}
+        ${
+          dashed
+            ? "border border-dashed border-slate-300/80"
+            : subtle
+            ? "border border-slate-200/50"
+            : "border border-slate-300/80"
+        }
+      `}
     >
-      {technologies.map((tech) => (
-        <div
-          key={tech.name}
-          className="
-            absolute left-1/2 top-1/2
-            -ml-[18px] -mt-[18px]
-            xs:-ml-[20px] xs:-mt-[20px]
-            sm:-ml-[22px] sm:-mt-[22px]
-          "
-          style={{
-            transform: `rotate(${tech.angle}deg) translateY(-${radius}px)`,
-          }}
-        >
-          <div style={{ transform: `rotate(${-tech.angle}deg)` }}>
-            <motion.div
-              animate={shouldReduceMotion ? undefined : counterRotation}
-              transition={{
-                duration,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              <TechNode tech={tech} />
-            </motion.div>
-          </div>
-        </div>
+      {tools.map((tool, index) => (
+        <ToolNode
+          key={tool.name}
+          tool={tool}
+          index={index}
+          reverse={reverse}
+          duration={duration}
+          reduceMotion={Boolean(shouldReduceMotion)}
+        />
       ))}
+
+      {!subtle && (
+        <span
+          className={`
+            absolute
+            left-1/2
+            top-[-3px]
+            h-1.5
+            w-1.5
+            -translate-x-1/2
+            rounded-full
+            ${dashed ? "bg-[#6C63FF]" : "bg-[#FF6B57]"}
+          `}
+        />
+      )}
     </motion.div>
   );
 }
 
-/* =========================================================
-   BRAND CORE
-========================================================= */
-
-function BrandCore({
-  shouldReduceMotion,
+function CategoryItem({
+  label,
+  count,
+  description,
+  icon: Icon,
+  iconClass,
+  bgClass,
 }: {
-  shouldReduceMotion: boolean | null;
+  label: string;
+  count: string;
+  description: string;
+  icon: typeof Palette;
+  iconClass: string;
+  bgClass: string;
 }) {
   return (
-    <motion.div
-      className="
-        relative z-30
-        flex
-        h-14 w-14
-        xs:h-16 xs:w-16
-        sm:h-[68px] sm:w-[68px]
-        items-center justify-center
-        rounded-[18px] xs:rounded-[21px] sm:rounded-[23px]
-        border border-slate-200
-        bg-white
-        shadow-[0_20px_50px_rgba(15,23,42,0.10)]
-      "
-      animate={
-        shouldReduceMotion
-          ? undefined
-          : {
-              y: [0, -3, 0],
-            }
-      }
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    >
+    <div className="group flex items-center gap-3">
       <div
-        className="
-          relative flex
-          h-9 w-9
-          xs:h-10 xs:w-10
-          sm:h-11 sm:w-11
-          items-center justify-center
-          rounded-xl xs:rounded-2xl
-          bg-slate-50
-        "
-      >
-        <Image
-          src="/logo.svg"
-          alt="Skinylabs Logo"
-          width={40}
-          height={40}
-          className="
-            h-7 w-7
-            xs:h-8 xs:w-8
-            sm:h-9 sm:w-9
-          "
-        />
-      </div>
-    </motion.div>
-  );
-}
-
-/* =========================================================
-   TECHNOLOGY VISUAL
-========================================================= */
-
-export default function TechStack() {
-  const shouldReduceMotion = useReducedMotion();
-
-  const outer = technologies.filter((technology) => technology.orbit === 1);
-
-  const middle = technologies.filter((technology) => technology.orbit === 2);
-
-  const inner = technologies.filter((technology) => technology.orbit === 3);
-
-  return (
-    <div
-      className="
-        relative flex
-        min-h-[300px]
-        xs:min-h-[320px]
-        sm:min-h-[370px]
-        md:min-h-[400px]
-        items-center justify-center
-        overflow-hidden
-        rounded-[22px]
-        xs:rounded-[26px]
-        sm:rounded-[30px]
-        border border-slate-200/90
-        bg-[#fafafa]
-        shadow-[0_18px_60px_rgba(15,23,42,0.05)]
-      "
-    >
-      {/* GRID */}
-      <div
-        className="
-          pointer-events-none absolute inset-0
-          opacity-[0.28]
-        "
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)",
-          backgroundSize: "36px 36px",
-          maskImage:
-            "radial-gradient(circle at center, black 0%, transparent 72%)",
-          WebkitMaskImage:
-            "radial-gradient(circle at center, black 0%, transparent 72%)",
-        }}
-      />
-
-      {/* CENTER GLOW */}
-      <div
-        className="
-          pointer-events-none absolute
-          left-1/2 top-1/2
-          h-52 w-52
-          -translate-x-1/2 -translate-y-1/2
-          rounded-full
-          bg-white
-          blur-3xl
-          sm:h-64 sm:w-64
-        "
-      />
-
-      {/* ORBIT SYSTEM */}
-      <div
-        className="
-          relative
+        className={`
           flex
-          h-[230px] w-[230px]
-          xs:h-[250px] xs:w-[250px]
-          sm:h-[290px] sm:w-[290px]
-          md:h-[320px] md:w-[320px]
-          items-center justify-center
-        "
+          h-9
+          w-9
+          shrink-0
+          items-center
+          justify-center
+          rounded-[11px]
+          ${bgClass}
+          transition-transform
+          duration-300
+          group-hover:scale-105
+        `}
       >
-        <Orbit
-          size={250}
-          radius={125}
-          duration={50}
-          direction={1}
-          technologies={outer}
-          shouldReduceMotion={shouldReduceMotion}
-        />
-
-        <Orbit
-          size={180}
-          radius={90}
-          duration={36}
-          direction={-1}
-          technologies={middle}
-          shouldReduceMotion={shouldReduceMotion}
-          dashed
-        />
-
-        <Orbit
-          size={110}
-          radius={55}
-          duration={26}
-          direction={1}
-          technologies={inner}
-          shouldReduceMotion={shouldReduceMotion}
-        />
-
-        <BrandCore shouldReduceMotion={shouldReduceMotion} />
+        <Icon size={15} strokeWidth={1.6} className={iconClass} />
       </div>
 
-      {/* STATUS */}
-      <div
-        className="
-          absolute bottom-4 left-4
-          hidden items-center gap-2
-          sm:flex
-        "
-      >
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+      <div className="min-w-0">
+        <div className="flex items-center gap-2">
+          <span
+            className="
+              text-[10px]
+              font-semibold
+              tracking-[-0.01em]
+              text-slate-800
+            "
+          >
+            {label}
+          </span>
 
-        <span
+          <span
+            className="
+              font-mono
+              text-[8px]
+              text-slate-300
+            "
+          >
+            {count}
+          </span>
+        </div>
+
+        <p
           className="
-            text-[8px]
-            font-medium uppercase
-            tracking-[0.16em]
+            mt-0.5
+            text-[9px]
+            leading-4
             text-slate-400
           "
         >
-          Digital ecosystem
-        </span>
-      </div>
-
-      <div
-        className="
-          absolute bottom-4 right-4
-          hidden
-          text-[8px]
-          font-medium
-          tracking-wide
-          text-slate-300
-          sm:block
-        "
-      >
-        2026
+          {description}
+        </p>
       </div>
     </div>
+  );
+}
+
+/* =========================================================
+   ORBIT DECORATIONS
+========================================================= */
+
+function OrbitDecorations() {
+  return (
+    <>
+      {/* Floating particle */}
+
+      <motion.span
+        animate={{
+          y: [0, -7, 0],
+          opacity: [0.4, 0.9, 0.4],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          left-[9%]
+          top-[24%]
+          h-1.5
+          w-1.5
+          rounded-full
+          bg-[#FF6B57]
+        "
+      />
+
+      <motion.span
+        animate={{
+          y: [0, 6, 0],
+          opacity: [0.3, 0.8, 0.3],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          right-[12%]
+          top-[17%]
+          h-1
+          w-1
+          rounded-full
+          bg-[#6C63FF]
+        "
+      />
+
+      <motion.span
+        animate={{
+          y: [0, -5, 0],
+          opacity: [0.25, 0.7, 0.25],
+        }}
+        transition={{
+          duration: 4.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          bottom-[18%]
+          left-[15%]
+          h-1
+          w-1
+          rounded-full
+          bg-[#F4C430]
+        "
+      />
+
+      <span
+        className="
+          absolute
+          bottom-[23%]
+          right-[9%]
+          h-1.5
+          w-1.5
+          rounded-full
+          bg-slate-300
+        "
+      />
+
+      {/* Tiny cross */}
+
+      <span className="absolute left-[18%] top-[70%]">
+        <span
+          className="
+            absolute
+            left-1/2
+            top-0
+            h-3
+            w-px
+            -translate-x-1/2
+            bg-slate-200
+          "
+        />
+
+        <span
+          className="
+            absolute
+            left-0
+            top-1/2
+            h-px
+            w-3
+            -translate-y-1/2
+            bg-slate-200
+          "
+        />
+      </span>
+
+      {/* Another tiny cross */}
+
+      <span className="absolute bottom-[35%] right-[17%]">
+        <span
+          className="
+            absolute
+            left-1/2
+            top-0
+            h-2.5
+            w-px
+            -translate-x-1/2
+            bg-slate-200
+          "
+        />
+
+        <span
+          className="
+            absolute
+            left-0
+            top-1/2
+            h-px
+            w-2.5
+            -translate-y-1/2
+            bg-slate-200
+          "
+        />
+      </span>
+    </>
+  );
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+export default function TechStack() {
+  return (
+    <section
+      className="
+        w-full
+        overflow-hidden
+        bg-[#F8F7F3]
+        py-24
+        md:py-32
+      "
+    >
+      <div
+        className="
+          mx-auto
+          max-w-7xl
+          px-5
+          sm:px-6
+          lg:px-8
+        "
+      >
+        {/* =====================================================
+            SECTION HEADER
+        ====================================================== */}
+
+        <div className="border-t border-slate-200 pt-7">
+          <div className="flex items-center gap-3">
+            <span
+              className="
+                font-mono
+                text-[10px]
+                tracking-[0.16em]
+                text-slate-300
+              "
+            >
+              02
+            </span>
+
+            <span className="h-px w-7 bg-slate-200" />
+
+            <span
+              className="
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.2em]
+                text-slate-400
+              "
+            >
+              Our toolkit
+            </span>
+          </div>
+        </div>
+
+        {/* =====================================================
+            MAIN GRID
+        ====================================================== */}
+
+        <div
+          className="
+            mt-12
+            grid
+            items-center
+            gap-12
+            lg:grid-cols-[1.05fr_0.95fr]
+            lg:gap-16
+            xl:gap-20
+          "
+        >
+          {/* ===================================================
+              LEFT — EDITORIAL CONTENT
+          ==================================================== */}
+
+          <div className="max-w-xl">
+            {/* Eyebrow */}
+
+            <div className="mb-5 flex items-center gap-2">
+              <div
+                className="
+                  flex
+                  h-6
+                  w-6
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-slate-950
+                  text-white
+                "
+              >
+                <Layers3 size={11} strokeWidth={1.6} />
+              </div>
+
+              <span
+                className="
+                  text-[9px]
+                  font-medium
+                  uppercase
+                  tracking-[0.16em]
+                  text-slate-400
+                "
+              >
+                Built around the work
+              </span>
+            </div>
+
+            {/* Title */}
+
+            <h2
+              className="
+                text-[46px]
+                font-semibold
+                leading-[0.92]
+                tracking-[-0.065em]
+                text-slate-950
+                sm:text-[58px]
+                md:text-[66px]
+                lg:text-[70px]
+              "
+            >
+              Everything we need
+              <br />
+              <span className="text-slate-400">to make ideas real.</span>
+            </h2>
+
+            {/* Description */}
+
+            <p
+              className="
+                mt-7
+                max-w-md
+                text-[12px]
+                leading-6
+                text-slate-500
+                sm:text-[13px]
+              "
+            >
+              From visual direction to production-ready digital products, we
+              bring design, development, and AI into one flexible toolkit.
+            </p>
+
+            {/* Categories */}
+
+            <div
+              className="
+                mt-9
+                grid
+                gap-4
+                border-t
+                border-slate-200
+                pt-6
+                sm:grid-cols-3
+                sm:gap-5
+              "
+            >
+              {categories.map((category) => (
+                <CategoryItem key={category.label} {...category} />
+              ))}
+            </div>
+
+            {/* Statement */}
+
+            <div className="mt-9 flex items-center gap-3">
+              <span
+                className="
+                  h-1.5
+                  w-1.5
+                  rounded-full
+                  bg-[#FF6B57]
+                "
+              />
+
+              <span
+                className="
+                  text-[9px]
+                  text-slate-400
+                "
+              >
+                The tools evolve. The standard stays high.
+              </span>
+            </div>
+          </div>
+
+          {/* ===================================================
+              RIGHT — ORBIT SYSTEM
+          ==================================================== */}
+
+          <div
+            className="
+              relative
+              flex
+              min-h-[330px]
+              items-center
+              justify-center
+              sm:min-h-[390px]
+              lg:min-h-[460px]
+            "
+          >
+            {/* Soft atmosphere */}
+
+            <div
+              className="
+                absolute
+                left-1/2
+                top-1/2
+                h-[260px]
+                w-[260px]
+                -translate-x-1/2
+                -translate-y-1/2
+                rounded-full
+                bg-white/60
+                blur-[1px]
+                sm:h-[330px]
+                sm:w-[330px]
+                lg:h-[390px]
+                lg:w-[390px]
+              "
+            />
+
+            {/* Radial glow */}
+
+            <div
+              className="
+                absolute
+                left-1/2
+                top-1/2
+                h-[180px]
+                w-[180px]
+                -translate-x-1/2
+                -translate-y-1/2
+                rounded-full
+                bg-white/80
+                blur-2xl
+                sm:h-[230px]
+                sm:w-[230px]
+              "
+            />
+
+            {/* =================================================
+                ORBIT PLAYGROUND
+            ================================================== */}
+
+            <div
+              className="
+                relative
+                aspect-square
+                w-full
+                max-w-[320px]
+                sm:max-w-[390px]
+                lg:max-w-[460px]
+              "
+            >
+              <OrbitDecorations />
+
+              {/* =================================================
+                  OUTER — BACKEND / AI
+              ================================================= */}
+
+              <Orbit
+                tools={backendTools}
+                size="h-[90%] w-[90%]"
+                duration={46}
+                reverse
+              />
+
+              {/* =================================================
+                  MIDDLE — FRONTEND
+
+                  FIX:
+                  4 nodes sekarang tepat pada circumference:
+
+                  React       → 0 / 50
+                  Next.js     → 100 / 50
+                  Tailwind    → 50 / 0
+                  TypeScript  → 50 / 100
+
+                  Tidak lagi menggunakan:
+                  7.57 / 92.43
+
+                  Jadi center icon benar-benar menempel
+                  di garis dashed.
+              ================================================== */}
+
+              <Orbit
+                tools={frontendTools}
+                size="h-[65%] w-[65%]"
+                duration={34}
+                dashed
+              />
+
+              {/* =================================================
+                  INNER — CREATIVE
+              ================================================== */}
+
+              <Orbit
+                tools={creativeTools}
+                size="h-[42%] w-[42%]"
+                duration={25}
+                reverse
+                subtle
+              />
+
+              {/* =================================================
+                  CENTER HUB
+              ================================================== */}
+
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  scale: 0.8,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.3,
+                }}
+                transition={{
+                  duration: 0.7,
+                  ease: "easeOut",
+                }}
+                className="
+                  absolute
+                  left-1/2
+                  top-1/2
+                  z-30
+                  flex
+                  h-[88px]
+                  w-[88px]
+                  -translate-x-1/2
+                  -translate-y-1/2
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-slate-200
+                  bg-[#F8F7F3]/95
+                  shadow-[0_15px_50px_rgba(15,23,42,0.08)]
+                  sm:h-[100px]
+                  sm:w-[100px]
+                "
+              >
+                <div
+                  className="
+                    flex
+                    h-[66px]
+                    w-[66px]
+                    flex-col
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-slate-950
+                    text-white
+                    shadow-[0_8px_30px_rgba(15,23,42,0.15)]
+                    sm:h-[74px]
+                    sm:w-[74px]
+                  "
+                >
+                  <Sparkles
+                    size={13}
+                    strokeWidth={1.5}
+                    className="text-white"
+                  />
+
+                  <span
+                    className="
+                      mt-1.5
+                      text-[7px]
+                      font-semibold
+                      tracking-[0.15em]
+                    "
+                  >
+                    SKINYLABS
+                  </span>
+
+                  <span
+                    className="
+                      mt-1
+                      text-[5.5px]
+                      tracking-[0.08em]
+                      text-slate-400
+                    "
+                  >
+                    CREATIVE TECH
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* <div
+                className="
+                  absolute
+                  left-[7%]
+                  top-[7%]
+                  z-40
+                  hidden
+                  sm:block
+                "
+              >
+                <div
+                  className="
+                    rounded-full
+                    border
+                    border-slate-200
+                    bg-[#F8F7F3]
+                    px-3
+                    py-1.5
+                    shadow-[0_5px_20px_rgba(15,23,42,0.04)]
+                  "
+                >
+                  <span
+                    className="
+                      text-[7px]
+                      font-medium
+                      uppercase
+                      tracking-[0.15em]
+                      text-slate-400
+                    "
+                  >
+                    Design
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className="
+                  absolute
+                  bottom-[9%]
+                  right-[2%]
+                  z-40
+                  hidden
+                  sm:block
+                "
+              >
+                <div
+                  className="
+                    rounded-full
+                    border
+                    border-slate-200
+                    bg-[#F8F7F3]
+                    px-3
+                    py-1.5
+                    shadow-[0_5px_20px_rgba(15,23,42,0.04)]
+                  "
+                >
+                  <span
+                    className="
+                      text-[7px]
+                      font-medium
+                      uppercase
+                      tracking-[0.15em]
+                      text-slate-400
+                    "
+                  >
+                    Build
+                  </span>
+                </div>
+              </div> */}
+
+              <div
+                className="
+                  absolute
+                  bottom-[4%]
+                  left-1/2
+                  z-40
+                  -translate-x-1/2
+                "
+              >
+                <div className="flex items-center gap-2">
+                  <span className="h-px w-5 bg-slate-200" />
+
+                  <span
+                    className="
+                      font-mono
+                      text-[7px]
+                      tracking-[0.16em]
+                      text-slate-300
+                    "
+                  >
+                    16 TOOLS
+                  </span>
+
+                  <span className="h-px w-5 bg-slate-200" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="
+            mt-12
+            flex
+            flex-col
+            gap-4
+            border-t
+            border-slate-200
+            pt-5
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <p
+            className="
+              max-w-sm
+              text-[10px]
+              leading-5
+              text-slate-400
+            "
+          >
+            A flexible stack for turning rough ideas into polished digital
+            experiences.
+          </p>
+
+          <a
+            href="/work"
+            className="
+              group
+              flex
+              w-fit
+              items-center
+              gap-2
+              text-[10px]
+              font-medium
+              text-slate-600
+              transition-colors
+              hover:text-slate-950
+            "
+          >
+            See what we build
+            <span
+              className="
+                flex
+                h-7
+                w-7
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-slate-200
+                transition-all
+                duration-300
+                group-hover:-translate-y-0.5
+                group-hover:translate-x-0.5
+                group-hover:border-slate-900
+                group-hover:bg-slate-900
+                group-hover:text-white
+              "
+            >
+              <ArrowUpRight size={12} />
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }
