@@ -169,10 +169,7 @@ export default function WhySkinylabs() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#F8F7F3] py-24 md:py-32 lg:py-40">
-      {/* Background details */}
-      <div className="pointer-events-none absolute left-[8%] top-[15%] h-2 w-2 rounded-full bg-[#FF6B57]" />
-
+    <section className="relative w-full overflow-hidden bg-[#F8F7F3] py-12">
       <div className="pointer-events-none absolute right-[12%] top-[28%] h-1.5 w-1.5 rounded-full bg-slate-300" />
 
       <div className="pointer-events-none absolute bottom-[15%] left-[18%] h-1.5 w-1.5 rounded-full bg-slate-300" />
@@ -192,16 +189,12 @@ export default function WhySkinylabs() {
           }}
           className="max-w-4xl"
         >
-          <div className="mb-6 flex items-center gap-3">
-            <span className="font-mono text-[10px] font-medium tracking-[0.16em] text-slate-300">
-              01
-            </span>
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-2 w-2 rounded-full bg-[#FF6B57]" />
 
-            <span className="h-px w-8 bg-slate-200" />
-
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-              Why Skinylabs
-            </span>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+              Explore the collection
+            </p>
           </div>
 
           <h2 className="text-[48px] font-semibold leading-[0.92] tracking-[-0.065em] text-slate-950 sm:text-[64px] md:text-[78px] lg:text-[92px]">
@@ -236,7 +229,7 @@ export default function WhySkinylabs() {
             CLOSING STATEMENT
         ====================================================== */}
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -276,7 +269,7 @@ export default function WhySkinylabs() {
               <ArrowUpRight size={13} />
             </span>
           </a>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

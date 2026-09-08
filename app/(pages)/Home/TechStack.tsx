@@ -639,8 +639,7 @@ export default function TechStack() {
         w-full
         overflow-hidden
         bg-[#F8F7F3]
-        py-24
-        md:py-32
+        py-8
       "
     >
       <div
@@ -655,35 +654,16 @@ export default function TechStack() {
         {/* =====================================================
             SECTION HEADER
         ====================================================== */}
-
+        {/* 
         <div className="border-t border-slate-200 pt-7">
-          <div className="flex items-center gap-3">
-            <span
-              className="
-                font-mono
-                text-[10px]
-                tracking-[0.16em]
-                text-slate-300
-              "
-            >
-              02
-            </span>
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-2 w-2 rounded-full bg-[#FF6B57]" />
 
-            <span className="h-px w-7 bg-slate-200" />
-
-            <span
-              className="
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.2em]
-                text-slate-400
-              "
-            >
-              Our toolkit
-            </span>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+              Explore the collection
+            </p>
           </div>
-        </div>
+        </div> */}
 
         {/* =====================================================
             MAIN GRID
@@ -959,8 +939,8 @@ export default function TechStack() {
                   top-1/2
                   z-30
                   flex
-                  h-[88px]
-                  w-[88px]
+                  h-22
+                  w-22
                   -translate-x-1/2
                   -translate-y-1/2
                   items-center
@@ -970,53 +950,27 @@ export default function TechStack() {
                   border-slate-200
                   bg-[#F8F7F3]/95
                   shadow-[0_15px_50px_rgba(15,23,42,0.08)]
-                  sm:h-[100px]
-                  sm:w-[100px]
+                  sm:h-25
+                  sm:w-25
                 "
               >
                 <div
                   className="
                     flex
-                    h-[66px]
-                    w-[66px]
+                    h-16.5
+                    w-16.5
                     flex-col
                     items-center
                     justify-center
                     rounded-full
-                    bg-slate-950
+                    bg-white
                     text-white
                     shadow-[0_8px_30px_rgba(15,23,42,0.15)]
-                    sm:h-[74px]
-                    sm:w-[74px]
+                    sm:h-18.5
+                    sm:w-18.5
                   "
                 >
-                  <Sparkles
-                    size={13}
-                    strokeWidth={1.5}
-                    className="text-white"
-                  />
-
-                  <span
-                    className="
-                      mt-1.5
-                      text-[7px]
-                      font-semibold
-                      tracking-[0.15em]
-                    "
-                  >
-                    SKINYLABS
-                  </span>
-
-                  <span
-                    className="
-                      mt-1
-                      text-[5.5px]
-                      tracking-[0.08em]
-                      text-slate-400
-                    "
-                  >
-                    CREATIVE TECH
-                  </span>
+                  <img src="/logo.svg" alt="" width={50} height={50} />
                 </div>
               </motion.div>
 
