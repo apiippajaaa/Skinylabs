@@ -575,7 +575,6 @@ export default function WhySkinylabs() {
         relative
         w-full
         overflow-hidden
-        bg-[#F8F7F3]
         py-16
         sm:py-20
         md:py-24
@@ -693,42 +692,6 @@ export default function WhySkinylabs() {
             <Benefit key={benefit.title} benefit={benefit} />
           ))}
         </div>
-
-        {/* Bottom line */}
-        <motion.div
-          initial={shouldReduceMotion ? undefined : { opacity: 0 }}
-          whileInView={shouldReduceMotion ? undefined : { opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="
-            mt-14
-            flex
-            flex-col
-            gap-3
-            border-t
-            border-slate-200
-            pt-6
-            sm:flex-row
-            sm:items-center
-            sm:justify-between
-          "
-        >
-          <span
-            className="
-              font-mono
-              text-[9px]
-              uppercase
-              tracking-[0.16em]
-              text-slate-300
-            "
-          >
-            Design × Develop × Create
-          </span>
-
-          <span className="text-[11px] text-slate-400">
-            Different skills. One direction.
-          </span>
-        </motion.div>
       </div>
     </section>
   );

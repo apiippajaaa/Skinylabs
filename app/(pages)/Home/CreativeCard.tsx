@@ -227,9 +227,12 @@ export default function CreativeCard({
     group relative
     flex min-h-55 flex-col
     overflow-hidden
-    rounded-[24px]
+    rounded-3xl
     border border-slate-200/70
-    bg-white
+
+ bg-white 
+ 
+
     p-4
     transition-all duration-500
     ease-out

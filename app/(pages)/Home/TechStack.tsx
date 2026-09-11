@@ -638,7 +638,7 @@ export default function TechStack() {
       className="
         w-full
         overflow-hidden
-        bg-[#F8F7F3]
+       
         py-8
       "
     >
@@ -1074,7 +1074,7 @@ export default function TechStack() {
           </div>
         </div>
 
-        <div
+        {/* <div
           className="
             mt-12
             flex
@@ -1138,7 +1138,7 @@ export default function TechStack() {
               <ArrowUpRight size={12} />
             </span>
           </a>
-        </div>
+        </div> */}
       </div>
     </section>
   );
