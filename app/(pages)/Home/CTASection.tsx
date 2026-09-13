@@ -1,131 +1,686 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
+import {
+  ArrowUpRight,
+  Camera,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Sparkles,
+} from "lucide-react";
+
+/* =========================================================
+   CONTACT DATA
+========================================================= */
+
+const CONTACT_ITEMS = [
+  {
+    label: "Email",
+    value: "your@email.com",
+    href: "mailto:your@email.com",
+    icon: Mail,
+    accent: "#FF6B57",
+  },
+  {
+    label: "Instagram",
+    value: "@skinylabs",
+    href: "#",
+    icon: Camera,
+    accent: "#A78BFA",
+  },
+  {
+    label: "Lokasi",
+    value: "Klaten, Indonesia",
+    href: "#",
+    icon: MapPin,
+    accent: "#F4C430",
+  },
+  {
+    label: "WhatsApp",
+    value: "Mari ngobrol",
+    href: "#",
+    icon: MessageCircle,
+    accent: "#35BFA4",
+  },
+] as const;
+
+/* =========================================================
+   CONTACT ITEM
+========================================================= */
+
+function ContactItem({
+  label,
+  value,
+  href,
+  icon: Icon,
+  accent,
+}: (typeof CONTACT_ITEMS)[number]) {
+  return (
+    <Link
+      href={href}
+      className="
+        group
+        relative
+        flex
+        min-w-0
+        items-center
+        gap-3
+        overflow-hidden
+        py-4
+        transition-transform
+        duration-500
+        sm:py-5
+        lg:hover:-translate-y-1
+      "
+    >
+      {/* =================================================
+          HORIZONTAL HOVER LINE
+      ================================================= */}
+
+      <span
+        aria-hidden="true"
+        className="
+          absolute
+          bottom-0
+          left-0
+          h-[2px]
+          w-full
+          origin-left
+          scale-x-0
+          transition-transform
+          duration-500
+          ease-out
+          group-hover:scale-x-100
+        "
+        style={{
+          backgroundColor: accent,
+        }}
+      />
+
+      {/* =================================================
+          ICON
+          Only this element rotates
+      ================================================= */}
+
+      <span
+        className="
+          relative
+          flex
+          h-11
+          w-11
+          shrink-0
+          items-center
+          justify-center
+          rounded-[14px]
+          border-[2px]
+          border-white
+          text-white
+          shadow-[4px_5px_0_rgba(15,23,42,0.06)]
+          transition-all
+          duration-500
+          group-hover:rotate-[-5deg]
+          group-hover:scale-105
+          group-hover:-translate-y-0.5
+          sm:h-12
+          sm:w-12
+        "
+        style={{
+          backgroundColor: accent,
+        }}
+      >
+        <Icon
+          size={18}
+          strokeWidth={1.8}
+          className="
+            relative
+            z-10
+          "
+        />
+      </span>
+
+      {/* =================================================
+          TEXT
+          Stays completely straight
+      ================================================= */}
+
+      <span className="min-w-0">
+        <span
+          className="
+            block
+            text-[9px]
+            font-semibold
+            uppercase
+            tracking-[0.18em]
+            text-slate-400
+            sm:text-[10px]
+          "
+        >
+          {label}
+        </span>
+
+        <span
+          className="
+            mt-1
+            block
+            truncate
+            text-[13px]
+            font-semibold
+            tracking-[-0.02em]
+            text-slate-900
+            sm:text-[14px]
+          "
+        >
+          {value}
+        </span>
+      </span>
+
+      {/* =================================================
+          ARROW
+          Slate normally → accent background on hover
+      ================================================= */}
+
+      <span
+        className="
+          ml-auto
+          flex
+          h-8
+          w-8
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-slate-100
+          text-slate-400
+          transition-all
+          duration-500
+          ease-out
+          group-hover:text-white
+        "
+        style={{
+          ["--contact-accent" as string]: accent,
+        }}
+      >
+        <span
+          className="
+            absolute
+            h-8
+            w-8
+            scale-0
+            rounded-full
+            transition-transform
+            duration-500
+            ease-out
+            group-hover:scale-100
+          "
+          style={{
+            backgroundColor: accent,
+          }}
+        />
+
+        <ArrowUpRight
+          size={14}
+          strokeWidth={1.8}
+          className="
+            relative
+            z-10
+            block
+            shrink-0
+            transition-transform
+            duration-500
+            group-hover:-translate-y-0.5
+            group-hover:translate-x-0.5
+          "
+        />
+      </span>
+    </Link>
+  );
+}
+
+/* =========================================================
+   MAIN CTA
+========================================================= */
 
 export default function CTASection() {
-  const reducedMotion = useReducedMotion();
+  const shouldReduceMotion = useReducedMotion();
+
+  const animationProps = {
+    initial: shouldReduceMotion
+      ? undefined
+      : {
+          opacity: 0,
+          y: 16,
+        },
+
+    whileInView: shouldReduceMotion
+      ? undefined
+      : {
+          opacity: 1,
+          y: 0,
+        },
+
+    viewport: {
+      once: true,
+      amount: 0.2,
+    },
+  };
 
   return (
-    <section className="w-full overflow-hidden py-24 sm:py-28 lg:py-36">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <div className="relative border-t border-slate-200 pt-10 sm:pt-14">
-          {/* Decorative route */}
-          <div className="pointer-events-none absolute right-[8%] top-[-1px] hidden md:block">
-            <svg width="150" height="110" viewBox="0 0 150 110" fill="none">
-              <motion.path
-                d="M0 1 C35 1 30 70 75 70 C115 70 105 108 150 108"
-                stroke="#CBD2DC"
-                strokeWidth="1.5"
-                strokeDasharray="3 7"
-                strokeLinecap="round"
-                initial={reducedMotion ? undefined : { pathLength: 0 }}
-                whileInView={reducedMotion ? undefined : { pathLength: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: reducedMotion ? 0 : 1.5,
-                  ease: "easeInOut",
-                }}
-              />
+    <section
+      id="contact"
+      aria-labelledby="contact-heading"
+      className="
+        relative
+        isolate
+        flex
+        min-h-0
+        w-full
+        items-center
+        overflow-hidden
+        py-12
+        sm:py-14
+        md:py-16
+        lg:min-h-[calc(100vh-5rem)]
+        lg:py-12
+      "
+    >
+      {/* =================================================
+          BACKGROUND
+      ================================================= */}
 
-              <motion.circle
-                cx="150"
-                cy="108"
-                r="4"
-                fill="#6C63FF"
-                initial={reducedMotion ? undefined : { scale: 0, opacity: 0 }}
-                whileInView={
-                  reducedMotion ? undefined : { scale: 1, opacity: 1 }
-                }
-                viewport={{ once: true }}
-                transition={{
-                  delay: reducedMotion ? 0 : 1.2,
-                  duration: 0.4,
-                }}
-              />
-            </svg>
-          </div>
+      <div
+        aria-hidden="true"
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          overflow-hidden
+        "
+      >
+        {/* Main soft glow */}
 
-          {/* Label */}
-          <div className="mb-8 flex items-center gap-3">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full border border-slate-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#6C63FF]" />
-            </span>
+        <div
+          className="
+            absolute
+            left-1/2
+            top-[38%]
+            h-[260px]
+            w-[260px]
+            -translate-x-1/2
+            rounded-full
+            bg-[#EAF2FF]
+            opacity-60
+            blur-3xl
+            sm:h-[340px]
+            sm:w-[340px]
+            md:h-[420px]
+            md:w-[420px]
+          "
+        />
 
-            <span className="font-mono text-[9px] tracking-[0.2em] text-slate-400">
-              WHAT&apos;S NEXT?
-            </span>
-          </div>
+        {/* Peach */}
 
-          {/* Main */}
-          <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <h2 className="max-w-3xl text-[3rem] font-semibold leading-[0.9] tracking-[-0.07em] text-slate-950 sm:text-5xl lg:text-[5rem]">
-                Punya sesuatu
-                <br />
-                <span className="text-slate-300">di kepala?</span>
-              </h2>
+        <div
+          className="
+            absolute
+            -right-24
+            -top-24
+            h-60
+            w-60
+            rounded-full
+            bg-[#FFF0ED]
+            opacity-60
+            blur-3xl
+            sm:h-72
+            sm:w-72
+          "
+        />
 
-              <p className="mt-7 max-w-md text-sm leading-7 text-slate-500 sm:text-[15px]">
-                Ceritakan idemu. Kita cari bentuk terbaik untuk membuatnya jadi
-                nyata.
-              </p>
-            </div>
+        {/* Green */}
 
-            {/* CTA */}
-            <motion.a
-              href="#contact"
-              whileHover={
-                reducedMotion
-                  ? undefined
-                  : {
-                      y: -6,
-                    }
-              }
-              whileTap={
-                reducedMotion
-                  ? undefined
-                  : {
-                      scale: 0.97,
-                    }
-              }
+        <div
+          className="
+            absolute
+            -bottom-24
+            -left-24
+            h-60
+            w-60
+            rounded-full
+            bg-[#E9FAF6]
+            opacity-60
+            blur-3xl
+            sm:h-72
+            sm:w-72
+          "
+        />
+      </div>
+
+      {/* =================================================
+          CONTENT
+      ================================================= */}
+
+      <div
+        className="
+          relative
+          mx-auto
+          w-full
+          max-w-7xl
+          px-5
+          sm:px-6
+          lg:px-8
+        "
+      >
+        {/* =================================================
+            EYEBROW
+        ================================================= */}
+
+        <motion.div
+          {...animationProps}
+          transition={{
+            duration: 0.5,
+            ease: "easeOut",
+          }}
+          className="flex items-center gap-3"
+        >
+          <span
+            className="
+              h-1.5
+              w-7
+              rounded-full
+              bg-[#FF6B57]
+            "
+          />
+
+          <p
+            className="
+              text-[9px]
+              font-semibold
+              uppercase
+              tracking-[0.2em]
+              text-slate-500
+              sm:text-[10px]
+            "
+          >
+            Mari membuat sesuatu
+          </p>
+        </motion.div>
+
+        {/* =================================================
+            HEADING
+        ================================================= */}
+
+        <motion.div
+          {...animationProps}
+          transition={{
+            duration: 0.65,
+            delay: 0.04,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="mt-5 sm:mt-6"
+        >
+          <h2
+            id="contact-heading"
+            className="
+              max-w-4xl
+              text-[clamp(2.7rem,6.2vw,5.2rem)]
+              font-semibold
+              leading-tight
+              tracking-[-0.065em]
+              text-slate-950
+            "
+          >
+            Punya ide?
+            <br />
+            <span className="text-slate-400">Mari wujudkan bersama.</span>
+          </h2>
+        </motion.div>
+
+        {/* =================================================
+            INTRO
+        ================================================= */}
+
+        <motion.div
+          {...animationProps}
+          transition={{
+            duration: 0.55,
+            delay: 0.12,
+            ease: "easeOut",
+          }}
+          className="
+            mt-6
+            flex
+            flex-col
+            gap-4
+            sm:mt-7
+            md:flex-row
+            md:items-end
+            md:justify-between
+            md:gap-10
+          "
+        >
+          <p
+            className="
+              max-w-lg
+              text-[11px]
+              leading-6
+              text-slate-400
+              sm:text-[12px]
+              md:text-[13px]
+            "
+          >
+            Ceritakan apa yang sedang kamu pikirkan. Website, desain, video,
+            produk digital, atau sesuatu yang belum punya bentuk — kita bisa
+            mulai dari sana.
+          </p>
+
+          <div
+            className="
+              flex
+              shrink-0
+              items-center
+              gap-3
+            "
+          >
+            <span className="h-px w-7 bg-slate-300" />
+
+            <span
               className="
-                group relative
-                flex h-32 w-32 shrink-0
-                items-center justify-center
-                rounded-full
-                bg-[#6C63FF]
-                text-white
-                transition-shadow duration-500
-                hover:shadow-[0_25px_50px_-20px_rgba(108,99,255,0.6)]
-                sm:h-36 sm:w-36
+                text-[8px]
+                font-medium
+                uppercase
+                tracking-[0.16em]
+                text-slate-300
+                sm:text-[9px]
               "
             >
-              <span className="absolute inset-2 rounded-full border border-white/20 transition-transform duration-500 group-hover:scale-90" />
-
-              <span className="relative flex flex-col items-center gap-2">
-                <span className="text-[11px] font-medium tracking-wide">
-                  Start a project
-                </span>
-
-                <ArrowUpRight
-                  size={20}
-                  strokeWidth={1.7}
-                  className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
-                />
-              </span>
-            </motion.a>
-          </div>
-
-          {/* Bottom note */}
-          <div className="mt-14 flex items-center gap-3">
-            <span className="h-px w-10 bg-slate-200" />
-
-            <span className="text-[10px] text-slate-400">
-              No big brief needed. Just say hello.
+              Ide · Desain · Eksekusi
             </span>
           </div>
-        </div>
+        </motion.div>
+
+        {/* =================================================
+            CONTACT
+        ================================================= */}
+
+        <motion.div
+          {...animationProps}
+          transition={{
+            duration: 0.65,
+            delay: 0.2,
+            ease: "easeOut",
+          }}
+          className="
+            relative
+            mt-8
+            border-y
+            border-slate-200
+            sm:mt-9
+          "
+        >
+          <div
+            className="
+              grid
+              grid-cols-1
+              divide-y
+              divide-slate-200
+              sm:grid-cols-2
+              sm:divide-x
+              sm:divide-y-0
+              lg:grid-cols-4
+            "
+          >
+            {CONTACT_ITEMS.map((item) => (
+              <div
+                key={item.label}
+                className="
+                  min-w-0
+                  sm:px-5
+                  lg:px-6
+                  first:sm:pl-0
+                  last:sm:pr-0
+                "
+              >
+                <ContactItem {...item} />
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* =================================================
+            FINAL CTA
+        ================================================= */}
+
+        <motion.div
+          {...animationProps}
+          transition={{
+            duration: 0.6,
+            delay: 0.28,
+            ease: "easeOut",
+          }}
+          className="
+            mt-7
+            flex
+            flex-col
+            gap-4
+            sm:mt-8
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <div className="flex items-center gap-2.5">
+            <Sparkles size={14} strokeWidth={1.7} className="text-[#F4C430]" />
+
+            <span
+              className="
+                text-[10px]
+                text-slate-400
+                sm:text-[11px]
+              "
+            >
+              Hal baik biasanya dimulai dari sebuah percakapan.
+            </span>
+          </div>
+
+          <Link
+            href="mailto:your@email.com"
+            className="
+              group
+              inline-flex
+              w-fit
+              items-center
+              gap-2.5
+              text-[13px]
+              font-semibold
+              tracking-[-0.02em]
+              text-slate-950
+              sm:text-[14px]
+            "
+          >
+            <span
+              className="
+                border-b
+                border-slate-950
+                pb-0.5
+                transition-colors
+                duration-300
+                group-hover:border-[#FF6B57]
+              "
+            >
+              Mulai percakapan
+            </span>
+
+            <span
+              className="
+                flex
+                h-8
+                w-8
+                items-center
+                justify-center
+                rounded-full
+                bg-slate-950
+                text-white
+                transition-all
+                duration-500
+                group-hover:rotate-45
+                group-hover:bg-[#FF6B57]
+              "
+            >
+              <ArrowUpRight size={14} strokeWidth={1.8} />
+            </span>
+          </Link>
+        </motion.div>
+
+        {/* =================================================
+            SIGNATURE
+        ================================================= */}
+
+        <motion.div
+          {...animationProps}
+          transition={{
+            duration: 0.5,
+            delay: 0.35,
+            ease: "easeOut",
+          }}
+          className="
+            mt-7
+            flex
+            flex-col
+            gap-2
+            border-t
+            border-slate-100
+            pt-4
+            sm:mt-8
+            sm:flex-row
+            sm:items-center
+            sm:justify-between
+          "
+        >
+          <span
+            className="
+              text-[8px]
+              font-medium
+              uppercase
+              tracking-[0.18em]
+              text-slate-300
+            "
+          >
+            Skinylabs Creative
+          </span>
+
+          <span
+            className="
+              text-[8px]
+              uppercase
+              tracking-[0.14em]
+              text-slate-300
+            "
+          >
+            Dibuat dengan rasa ingin tahu
+          </span>
+        </motion.div>
       </div>
     </section>
   );
