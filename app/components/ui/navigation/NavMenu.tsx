@@ -11,7 +11,7 @@ const menuItems = [
   },
   {
     name: "Explore",
-    href: "/explore",
+    href: "/Explore",
     hoverText: "hover:text-[#4280A7]",
     underline: "bg-[#A7D7F1]",
     mobileBg: "bg-[#E5F4FC]",
