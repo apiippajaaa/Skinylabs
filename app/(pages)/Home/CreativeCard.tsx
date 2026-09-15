@@ -26,7 +26,6 @@ export default function CreativeCard({
 }: CreativeCardProps) {
   const content = (
     <>
-      {/* Background shape */}
       <div
         className={`
           pointer-events-none
@@ -43,7 +42,6 @@ export default function CreativeCard({
         `}
       />
 
-      {/* Decorative dot */}
       <div
         className={`
           pointer-events-none
@@ -58,7 +56,6 @@ export default function CreativeCard({
         `}
       />
 
-      {/* Top row */}
       <div className="relative z-10 flex items-start justify-between">
         {number ? (
           <span className="font-mono text-[10px] font-medium tracking-[0.14em] text-slate-300">
@@ -99,7 +96,6 @@ export default function CreativeCard({
         </span>
       </div>
 
-      {/* Icon */}
       <div className="relative z-10 mt-8 sm:mt-9">
         <div
           className={`
@@ -140,7 +136,6 @@ export default function CreativeCard({
           />
         </div>
 
-        {/* Offset shape */}
         <div
           className={`
             absolute -bottom-1 left-1
@@ -158,7 +153,6 @@ export default function CreativeCard({
         />
       </div>
 
-      {/* Content */}
       <div className="relative z-10 mt-auto pt-6 sm:pt-8">
         <h3
           className="
@@ -189,7 +183,6 @@ export default function CreativeCard({
         </p>
       </div>
 
-      {/* Bottom accent */}
       <div
         className={`
           absolute bottom-0 left-5 right-5
@@ -205,7 +198,6 @@ export default function CreativeCard({
         `}
       />
 
-      {/* Corner detail */}
       <div
         className="
           pointer-events-none

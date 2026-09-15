@@ -437,10 +437,6 @@ export default function CTASection() {
           </h2>
         </motion.div>
 
-        {/* =================================================
-            INTRO
-        ================================================= */}
-
         <motion.div
           {...animationProps}
           transition={{
@@ -448,53 +444,18 @@ export default function CTASection() {
             delay: 0.12,
             ease: "easeOut",
           }}
-          className="
-            mt-6
-            flex
-            flex-col
-            gap-4
-            sm:mt-7
-            md:flex-row
-            md:items-end
-            md:justify-between
-            md:gap-10
-          "
+          className="mt-6 flex flex-col gap-4 sm:mt-7 md:flex-row md:items-end md:justify-between md:gap-10"
         >
-          <p
-            className="
-              max-w-lg
-              text-[11px]
-              leading-6
-              text-slate-400
-              sm:text-[12px]
-              md:text-[13px]
-            "
-          >
+          <p className="max-w-lg text-[11px] leading-6 text-slate-400 sm:text-[12px] md:text-[13px]">
             Ceritakan apa yang sedang kamu pikirkan. Website, desain, video,
             produk digital, atau sesuatu yang belum punya bentuk — kita bisa
             mulai dari sana.
           </p>
 
-          <div
-            className="
-              flex
-              shrink-0
-              items-center
-              gap-3
-            "
-          >
+          <div className="flex shrink-0 items-center gap-3">
             <span className="h-px w-7 bg-slate-300" />
 
-            <span
-              className="
-                text-[8px]
-                font-medium
-                uppercase
-                tracking-[0.16em]
-                text-slate-300
-                sm:text-[9px]
-              "
-            >
+            <span className="text-[8px] font-medium uppercase tracking-[0.16em] text-slate-300 sm:text-[9px]">
               Ide · Desain · Eksekusi
             </span>
           </div>
