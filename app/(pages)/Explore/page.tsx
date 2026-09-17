@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, Shapes, Star } from "lucide-react";
+import { ArrowUpRight, Shapes } from "lucide-react";
 
 import { categories } from "@/app/(pages)/Home/data/ExploreCategories";
 import CreativeCard from "@/app/(pages)/Home/CreativeCard";
@@ -39,10 +39,11 @@ export default function ExplorePage() {
       <section>
         <div
           className="
-            mx-auto max-w-7xl
-            px-5 py-8
-            sm:px-8 sm:py-2
-            lg:px-10 lg:py-24
+            mx-auto w-full max-w-7xl
+            px-5
+            py-14
+            sm:px-8 sm:py-18
+            lg:px-10 lg:py-10
           "
         >
           {/* ---------------------------------------------------------
@@ -50,14 +51,14 @@ export default function ExplorePage() {
           --------------------------------------------------------- */}
           <div
             className="
-              mb-9
-              flex
-              flex-col
-              gap-5
+              mb-10
+              flex flex-col
+              gap-6
 
               sm:mb-12
-              sm:gap-6
+              sm:gap-7
 
+              lg:mb-14
               lg:flex-row
               lg:items-end
               lg:justify-between
@@ -65,29 +66,25 @@ export default function ExplorePage() {
             "
           >
             {/* Heading */}
-            <div className="relative">
+            <div className="relative max-w-3xl">
               {/* Playful shape */}
               <div
                 aria-hidden="true"
                 className="
                   absolute
-                  -left-3
-                  -top-4
-                  h-8
-                  w-8
+                  -left-2.5 -top-3
+                  h-7 w-7
                   -rotate-6
-                  rounded-[10px]
+                  rounded-[9px]
                   bg-[#FFE4DE]
 
-                  sm:-left-6
-                  sm:-top-6
-                  sm:h-12
-                  sm:w-12
+                  sm:-left-5 sm:-top-5
+                  sm:h-10 sm:w-10
                 "
               />
 
               <div className="relative">
-                <div className="mb-2.5 flex items-center gap-2 sm:mb-3">
+                <div className="mb-3 flex items-center gap-2 sm:mb-3.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF9B8A]" />
 
                   <p
@@ -95,11 +92,11 @@ export default function ExplorePage() {
                       text-[9px]
                       font-semibold
                       uppercase
-                      tracking-[0.16em]
+                      tracking-[0.17em]
                       text-[#E47D6B]
 
                       sm:text-[10px]
-                      sm:tracking-[0.18em]
+                      sm:tracking-[0.19em]
                     "
                   >
                     Pilihan kreatif
@@ -108,14 +105,16 @@ export default function ExplorePage() {
 
                 <h2
                   className="
-                    text-[2.5rem]
+                    max-w-[760px]
+                    text-[2.7rem]
                     font-semibold
-                    leading-[0.95]
-                    tracking-[-0.06em]
+                    leading-[0.96]
+                    tracking-[-0.055em]
 
-                    sm:text-[3.8rem]
+                    sm:text-[3.5rem]
+                    sm:leading-[0.94]
 
-                    lg:text-[clamp(4rem,5vw,4.8rem)]
+                    lg:text-[clamp(3.8rem,5vw,4.75rem)]
                   "
                 >
                   Mau bikin apa{" "}
@@ -132,6 +131,9 @@ export default function ExplorePage() {
                         rotate-1
                         rounded-full
                         bg-[#BFEDE3]
+
+                        sm:-bottom-1.5
+                        sm:h-2
                       "
                     />
                   </span>
@@ -139,15 +141,19 @@ export default function ExplorePage() {
               </div>
             </div>
 
-            {/* Section description */}
+            {/* Description */}
             <p
               className="
-                max-w-[340px]
+                max-w-[360px]
                 text-[12px]
-                leading-[1.8]
+                leading-[1.75]
                 text-slate-400
 
-                sm:text-[14px]
+                sm:text-[13px]
+                sm:leading-[1.8]
+
+                lg:mb-1
+                lg:text-[14px]
               "
             >
               Pilih jalur yang paling dekat dengan ide kamu. Dari visual sampai
@@ -165,9 +171,10 @@ export default function ExplorePage() {
               gap-4
 
               sm:grid-cols-2
-              sm:gap-3
+              sm:gap-4
 
               lg:grid-cols-4
+              lg:gap-4
             "
           >
             {categories.map((category, index) => {
@@ -184,8 +191,7 @@ export default function ExplorePage() {
                   <div
                     className={`
                       absolute
-                      -right-1
-                      -top-2
+                      -right-1.5 -top-2
                       z-20
                       flex
                       h-7
@@ -194,6 +200,7 @@ export default function ExplorePage() {
                       justify-center
                       rounded-full
                       px-2
+
                       text-[8px]
                       font-bold
 
@@ -206,6 +213,8 @@ export default function ExplorePage() {
                       group-hover:-translate-y-1
                       group-hover:rotate-6
 
+                      sm:-right-1
+                      sm:-top-2.5
                       sm:h-8
                       sm:min-w-8
                       sm:text-[9px]
@@ -235,20 +244,22 @@ export default function ExplorePage() {
           --------------------------------------------------------- */}
           <div
             className="
-              mt-7
+              mt-8
               border-t
               border-slate-200
               pt-4
 
-              sm:mt-6
+              sm:mt-7
               sm:pt-5
+
+              lg:mt-8
             "
           >
             <div
               className="
                 flex
                 flex-col
-                gap-2.5
+                gap-3
 
                 sm:flex-row
                 sm:items-center
@@ -265,6 +276,8 @@ export default function ExplorePage() {
                     uppercase
                     tracking-[0.14em]
                     text-slate-300
+
+                    sm:text-[9px]
                   "
                 >
                   {String(categories.length).padStart(2, "0")} pilihan kreatif
@@ -273,12 +286,13 @@ export default function ExplorePage() {
 
               <p
                 className="
-                  max-w-[300px]
+                  max-w-[320px]
                   text-[10px]
-                  leading-relaxed
+                  leading-[1.6]
                   text-slate-400
 
                   sm:text-right
+                  sm:text-[11px]
                 "
               >
                 Pilih satu, gabungkan beberapa, atau buat sesuatu yang berbeda.
@@ -294,28 +308,33 @@ export default function ExplorePage() {
       <section>
         <div
           className="
-            mx-auto max-w-7xl
-            px-5 py-14
-            sm:px-8 sm:py-20
-            lg:px-10 lg:py-24
+            mx-auto w-full max-w-7xl
+            px-5
+            py-10
+
+            sm:px-8
+            sm:py-16
+
+            lg:px-10
+            lg:py-20
           "
         >
           <div
             className="
               relative
               overflow-hidden
-              rounded-[1.75rem]
+              rounded-[1.5rem]
               border
               border-slate-200
               px-5
-              py-9
+              py-8
 
-              sm:rounded-[2rem]
+              sm:rounded-[1.75rem]
               sm:px-10
-              sm:py-12
+              sm:py-11
 
               lg:px-14
-              lg:py-14
+              lg:py-12
             "
           >
             {/* ---------------------------------------------------------
@@ -325,19 +344,16 @@ export default function ExplorePage() {
               aria-hidden="true"
               className="
                 absolute
-                right-5
-                top-5
-                h-8
-                w-8
+                right-5 top-5
+                h-7 w-7
                 rotate-12
-                rounded-[9px]
+                rounded-[8px]
                 bg-[#FFF0C7]
 
-                sm:right-14
-                sm:top-10
-                sm:h-14
-                sm:w-14
-                sm:rounded-[12px]
+                sm:right-12
+                sm:top-9
+                sm:h-12 sm:w-12
+                sm:rounded-[11px]
               "
             />
 
@@ -345,17 +361,14 @@ export default function ExplorePage() {
               aria-hidden="true"
               className="
                 absolute
-                right-16
-                top-12
-                h-3
-                w-3
+                right-14 top-10
+                h-2.5 w-2.5
                 rounded-full
                 bg-[#FF9B8A]
 
-                sm:right-36
-                sm:top-20
-                sm:h-4
-                sm:w-4
+                sm:right-32
+                sm:top-16
+                sm:h-4 sm:w-4
               "
             />
 
@@ -363,11 +376,10 @@ export default function ExplorePage() {
               aria-hidden="true"
               className="
                 absolute
-                bottom-10
+                bottom-8
                 right-[20%]
                 hidden
-                h-5
-                w-5
+                h-5 w-5
                 rotate-45
                 rounded-[5px]
                 bg-[#BFEDE3]
@@ -380,16 +392,14 @@ export default function ExplorePage() {
               aria-hidden="true"
               className="
                 absolute
-                bottom-7
-                left-6
-                h-2.5
-                w-2.5
+                bottom-6
+                left-5
+                h-2.5 w-2.5
                 rounded-full
                 bg-[#A99BEF]
 
-                sm:left-14
-                sm:h-3
-                sm:w-3
+                sm:left-12
+                sm:h-3 sm:w-3
               "
             />
 
@@ -404,15 +414,14 @@ export default function ExplorePage() {
                 flex-col
                 gap-8
 
-                sm:gap-10
-
                 md:flex-row
                 md:items-center
                 md:justify-between
+                md:gap-12
               "
             >
               <div className="max-w-2xl">
-                <div className="mb-2.5 flex items-center gap-2 sm:mb-3">
+                <div className="mb-3 flex items-center gap-2 sm:mb-3.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#FF9B8A]" />
 
                   <p
@@ -420,11 +429,11 @@ export default function ExplorePage() {
                       text-[9px]
                       font-semibold
                       uppercase
-                      tracking-[0.16em]
+                      tracking-[0.17em]
                       text-[#E47D6B]
 
                       sm:text-[10px]
-                      sm:tracking-[0.18em]
+                      sm:tracking-[0.19em]
                     "
                   >
                     Ada yang ingin diwujudkan?
@@ -433,14 +442,15 @@ export default function ExplorePage() {
 
                 <h2
                   className="
-                    text-[2.5rem]
+                    text-[2.6rem]
                     font-semibold
-                    leading-[0.95]
-                    tracking-[-0.06em]
+                    leading-[0.96]
+                    tracking-[-0.055em]
 
-                    sm:text-[3.8rem]
+                    sm:text-[3.5rem]
+                    sm:leading-[0.94]
 
-                    lg:text-[clamp(4rem,5vw,4.8rem)]
+                    lg:text-[clamp(3.8rem,5vw,4.75rem)]
                   "
                 >
                   Punya ide kecil?
@@ -490,8 +500,7 @@ export default function ExplorePage() {
                 <span
                   className="
                     flex
-                    h-6
-                    w-6
+                    h-6 w-6
                     items-center
                     justify-center
                     rounded-full
@@ -503,8 +512,7 @@ export default function ExplorePage() {
                     group-hover:translate-x-0.5
                     group-hover:-translate-y-0.5
 
-                    sm:h-7
-                    sm:w-7
+                    sm:h-7 sm:w-7
                   "
                 >
                   <ArrowUpRight size={13} strokeWidth={1.8} />
@@ -527,10 +535,11 @@ export default function ExplorePage() {
                 border-slate-200/80
                 pt-4
 
-                sm:mt-10
+                sm:mt-9
                 sm:flex-row
                 sm:items-center
                 sm:justify-between
+                sm:pt-5
               "
             >
               <div className="flex items-center gap-2">
@@ -547,13 +556,15 @@ export default function ExplorePage() {
                     uppercase
                     tracking-[0.14em]
                     text-slate-300
+
+                    sm:text-[9px]
                   "
                 >
                   Skinylabs / Studio Kreatif
                 </span>
               </div>
 
-              <span className="text-[9px] text-slate-300">
+              <span className="text-[9px] text-slate-300 sm:text-[10px]">
                 Ide → Desain → Jadi
               </span>
             </div>
