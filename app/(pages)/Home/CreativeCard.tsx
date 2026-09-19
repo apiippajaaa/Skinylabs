@@ -1,3 +1,5 @@
+// app/(pages)/Home/CreativeCard.tsx
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -27,33 +29,12 @@ export default function CreativeCard({
   const content = (
     <>
       <div
-        className={`
-          pointer-events-none
-          absolute -right-12 -top-12
-          h-28 w-28
-          rounded-full
-          opacity-60
-          transition-all duration-700
-          ease-out
-          group-hover:scale-[2.1]
-          group-hover:opacity-100
-          sm:h-32 sm:w-32
-          ${soft}
+        className={`pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full opacity-60 transition-all duration-700 ease-out group-hover:scale-[2.1] group-hover:opacity-100 sm:h-32 sm:w-32 ${soft}
         `}
       />
 
       <div
-        className={`
-          pointer-events-none
-          absolute right-6 top-16
-          h-1.5 w-1.5
-          rounded-full
-          opacity-40
-          transition-all duration-500
-          group-hover:scale-150
-          group-hover:opacity-100
-          ${accent}
-        `}
+        className={`pointer-events-none absolute right-6 top-16 h-1.5 w-1.5 rounded-full opacity-40 transition-all duration-500 group-hover:scale-150 group-hover:opacity-100 ${accent}`}
       />
 
       <div className="relative z-10 flex items-start justify-between">
@@ -66,24 +47,7 @@ export default function CreativeCard({
         )}
 
         <span
-          className={`
-            flex h-8 w-8
-            items-center justify-center
-            rounded-full
-            border border-slate-200
-            bg-white/80
-            text-slate-400
-            shadow-sm
-            transition-all duration-500
-            group-hover:-translate-y-1
-            group-hover:translate-x-1
-            group-hover:border-transparent
-            group-hover:text-white
-            group-hover:shadow-md
-            sm:h-9 sm:w-9
-            ${accent}
-            ${hoverAccent}
-          `}
+          className={`flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-400 shadow-sm transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:border-transparent group-hover:text-white group-hover:shadow-md sm:h-9 sm:w-9 ${accent} ${hoverAccent}`}
         >
           <ArrowUpRight
             size={14}
@@ -221,10 +185,7 @@ export default function CreativeCard({
     overflow-hidden
     rounded-3xl
     border border-slate-200/70
-
- bg-white 
- 
-
+    bg-white
     p-4
     transition-all duration-500
     ease-out
@@ -239,9 +200,9 @@ export default function CreativeCard({
 
   if (href) {
     return (
-      <a href={href} className={className}>
+      <Link href={href} className={className}>
         {content}
-      </a>
+      </Link>
     );
   }
 

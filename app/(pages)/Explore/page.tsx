@@ -1,84 +1,31 @@
 import Link from "next/link";
 import { ArrowUpRight, Shapes } from "lucide-react";
 
-import { categories } from "@/app/(pages)/Home/data/ExploreCategories";
 import CreativeCard from "@/app/(pages)/Home/CreativeCard";
-
-function createSlug(name: string) {
-  return name
-    .toLowerCase()
-    .replace(/\s*\/\s*/g, "-")
-    .replace(/\s+/g, "-");
-}
-
-const pastelColors = [
-  {
-    soft: "bg-[#FFE4DE]",
-    text: "text-[#E47D6B]",
-  },
-  {
-    soft: "bg-[#DDF5EF]",
-    text: "text-[#52B7A5]",
-  },
-  {
-    soft: "bg-[#ECE9FF]",
-    text: "text-[#8374D4]",
-  },
-  {
-    soft: "bg-[#FFF3D5]",
-    text: "text-[#D5A63D]",
-  },
-];
+import { categories } from "./[slug]/Categories";
 
 export default function ExplorePage() {
   return (
     <main className="w-full overflow-hidden text-slate-950">
       {/* =========================================================
-          CATEGORY
+          HERO / CATEGORY
       ========================================================= */}
       <section>
-        <div
-          className="
-            mx-auto w-full max-w-7xl
-            px-5
-            py-14
-            sm:px-8 sm:py-18
-            lg:px-10 lg:py-10
-          "
-        >
-          {/* ---------------------------------------------------------
-              Section Header
-          --------------------------------------------------------- */}
-          <div
-            className="
-              mb-10
-              flex flex-col
-              gap-6
-
-              sm:mb-12
-              sm:gap-7
-
-              lg:mb-14
-              lg:flex-row
-              lg:items-end
-              lg:justify-between
-              lg:gap-16
-            "
-          >
+        <div className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-18 lg:px-10 lg:py-10">
+          {/* Header */}
+          <div className="mb-10 flex flex-col gap-6 sm:mb-12 sm:gap-7 lg:mb-14 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
             {/* Heading */}
             <div className="relative max-w-3xl">
-              {/* Playful shape */}
+              {/* Decorative shape */}
               <div
                 aria-hidden="true"
                 className="
-                  absolute
-                  -left-2.5 -top-3
+                  absolute -top-3 -left-2.5
                   h-7 w-7
                   -rotate-6
                   rounded-[9px]
                   bg-[#FFE4DE]
-
-                  sm:-left-5 sm:-top-5
+                  sm:-top-5 sm:-left-5
                   sm:h-10 sm:w-10
                 "
               />
@@ -94,7 +41,6 @@ export default function ExplorePage() {
                       uppercase
                       tracking-[0.17em]
                       text-[#E47D6B]
-
                       sm:text-[10px]
                       sm:tracking-[0.19em]
                     "
@@ -103,17 +49,15 @@ export default function ExplorePage() {
                   </p>
                 </div>
 
-                <h2
+                <h1
                   className="
                     max-w-[760px]
                     text-[2.7rem]
                     font-semibold
                     leading-[0.96]
                     tracking-[-0.055em]
-
                     sm:text-[3.5rem]
                     sm:leading-[0.94]
-
                     lg:text-[clamp(3.8rem,5vw,4.75rem)]
                   "
                 >
@@ -131,13 +75,12 @@ export default function ExplorePage() {
                         rotate-1
                         rounded-full
                         bg-[#BFEDE3]
-
                         sm:-bottom-1.5
                         sm:h-2
                       "
                     />
                   </span>
-                </h2>
+                </h1>
               </div>
             </div>
 
@@ -148,10 +91,8 @@ export default function ExplorePage() {
                 text-[12px]
                 leading-[1.75]
                 text-slate-400
-
                 sm:text-[13px]
                 sm:leading-[1.8]
-
                 lg:mb-1
                 lg:text-[14px]
               "
@@ -161,111 +102,61 @@ export default function ExplorePage() {
             </p>
           </div>
 
-          {/* ---------------------------------------------------------
-              Category Cards
-          --------------------------------------------------------- */}
-          <div
-            className="
-              grid
-              grid-cols-1
-              gap-4
-
-              sm:grid-cols-2
-              sm:gap-4
-
-              lg:grid-cols-4
-              lg:gap-4
-            "
-          >
-            {categories.map((category, index) => {
-              const slug =
-                "slug" in category && category.slug
-                  ? category.slug
-                  : createSlug(category.name);
-
-              const color = pastelColors[index % pastelColors.length];
-
-              return (
-                <div key={category.name} className="group relative">
-                  {/* Floating number */}
-                  <div
-                    className={`
-                      absolute
-                      -right-1.5 -top-2
-                      z-20
-                      flex
-                      h-7
-                      min-w-7
-                      items-center
-                      justify-center
-                      rounded-full
-                      px-2
-
-                      text-[8px]
-                      font-bold
-
-                      ${color.soft}
-                      ${color.text}
-
-                      transition-all
-                      duration-300
-
-                      group-hover:-translate-y-1
-                      group-hover:rotate-6
-
-                      sm:-right-1
-                      sm:-top-2.5
-                      sm:h-8
-                      sm:min-w-8
-                      sm:text-[9px]
-                    `}
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <CreativeCard
-                    number={String(index + 1).padStart(2, "0")}
-                    title={category.name}
-                    description={category.description}
-                    icon={category.icon}
-                    accent={category.accent}
-                    hoverAccent={category.hoverAccent}
-                    soft={category.soft}
-                    rotate={category.rotate}
-                    href={`/categories/${slug}`}
-                  />
+          {/* Category Cards */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((category, index) => (
+              <div key={category.slug} className="group relative">
+                {/* Number */}
+                <div
+                  className={`
+                    absolute
+                    -top-2
+                    -right-1.5
+                    z-20
+                    flex
+                    h-7
+                    min-w-7
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-slate-100
+                    px-2
+                    font-mono
+                    text-[8px]
+                    font-bold
+                    text-slate-400
+                    transition-all
+                    duration-300
+                    group-hover:-translate-y-1
+                    group-hover:rotate-6
+                    sm:-top-2.5
+                    sm:-right-1
+                    sm:h-8
+                    sm:min-w-8
+                    sm:text-[9px]
+                  `}
+                >
+                  {String(index + 1).padStart(2, "0")}
                 </div>
-              );
-            })}
+
+                <CreativeCard
+                  number={String(index + 1).padStart(2, "0")}
+                  title={category.name}
+                  description={category.description}
+                  icon={category.icon}
+                  accent={category.accent}
+                  hoverAccent={category.hoverAccent}
+                  soft={category.soft}
+                  rotate={category.rotate}
+                  href={`/explore/${category.slug}`}
+                />
+              </div>
+            ))}
           </div>
 
-          {/* ---------------------------------------------------------
-              Category Footer
-          --------------------------------------------------------- */}
-          <div
-            className="
-              mt-8
-              border-t
-              border-slate-200
-              pt-4
-
-              sm:mt-7
-              sm:pt-5
-
-              lg:mt-8
-            "
-          >
-            <div
-              className="
-                flex
-                flex-col
-                gap-3
-
-                sm:flex-row
-                sm:items-center
-                sm:justify-between
-              "
-            >
+          {/* Category Footer */}
+          <div className="mt-8 border-t border-slate-200 pt-4 sm:mt-7 sm:pt-5 lg:mt-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-2.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#7FD8C8]" />
 
@@ -276,7 +167,6 @@ export default function ExplorePage() {
                     uppercase
                     tracking-[0.14em]
                     text-slate-300
-
                     sm:text-[9px]
                   "
                 >
@@ -290,7 +180,6 @@ export default function ExplorePage() {
                   text-[10px]
                   leading-[1.6]
                   text-slate-400
-
                   sm:text-right
                   sm:text-[11px]
                 "
@@ -306,19 +195,7 @@ export default function ExplorePage() {
           CTA
       ========================================================= */}
       <section>
-        <div
-          className="
-            mx-auto w-full max-w-7xl
-            px-5
-            py-10
-
-            sm:px-8
-            sm:py-16
-
-            lg:px-10
-            lg:py-20
-          "
-        >
+        <div className="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
           <div
             className="
               relative
@@ -328,31 +205,29 @@ export default function ExplorePage() {
               border-slate-200
               px-5
               py-8
-
               sm:rounded-[1.75rem]
               sm:px-10
               sm:py-11
-
               lg:px-14
               lg:py-12
             "
           >
-            {/* ---------------------------------------------------------
-                Playful Accents
-            --------------------------------------------------------- */}
+            {/* Decorative shapes */}
             <div
               aria-hidden="true"
               className="
                 absolute
-                right-5 top-5
-                h-7 w-7
+                top-5
+                right-5
+                h-7
+                w-7
                 rotate-12
                 rounded-[8px]
                 bg-[#FFF0C7]
-
-                sm:right-12
                 sm:top-9
-                sm:h-12 sm:w-12
+                sm:right-12
+                sm:h-12
+                sm:w-12
                 sm:rounded-[11px]
               "
             />
@@ -361,14 +236,16 @@ export default function ExplorePage() {
               aria-hidden="true"
               className="
                 absolute
-                right-14 top-10
-                h-2.5 w-2.5
+                top-10
+                right-14
+                h-2.5
+                w-2.5
                 rounded-full
                 bg-[#FF9B8A]
-
-                sm:right-32
                 sm:top-16
-                sm:h-4 sm:w-4
+                sm:right-32
+                sm:h-4
+                sm:w-4
               "
             />
 
@@ -376,14 +253,14 @@ export default function ExplorePage() {
               aria-hidden="true"
               className="
                 absolute
-                bottom-8
                 right-[20%]
+                bottom-8
                 hidden
-                h-5 w-5
+                h-5
+                w-5
                 rotate-45
                 rounded-[5px]
                 bg-[#BFEDE3]
-
                 sm:block
               "
             />
@@ -394,18 +271,17 @@ export default function ExplorePage() {
                 absolute
                 bottom-6
                 left-5
-                h-2.5 w-2.5
+                h-2.5
+                w-2.5
                 rounded-full
                 bg-[#A99BEF]
-
                 sm:left-12
-                sm:h-3 sm:w-3
+                sm:h-3
+                sm:w-3
               "
             />
 
-            {/* ---------------------------------------------------------
-                CTA Content
-            --------------------------------------------------------- */}
+            {/* CTA Content */}
             <div
               className="
                 relative
@@ -413,7 +289,6 @@ export default function ExplorePage() {
                 flex
                 flex-col
                 gap-8
-
                 md:flex-row
                 md:items-center
                 md:justify-between
@@ -431,7 +306,6 @@ export default function ExplorePage() {
                       uppercase
                       tracking-[0.17em]
                       text-[#E47D6B]
-
                       sm:text-[10px]
                       sm:tracking-[0.19em]
                     "
@@ -446,10 +320,8 @@ export default function ExplorePage() {
                     font-semibold
                     leading-[0.96]
                     tracking-[-0.055em]
-
                     sm:text-[3.5rem]
                     sm:leading-[0.94]
-
                     lg:text-[clamp(3.8rem,5vw,4.75rem)]
                   "
                 >
@@ -478,18 +350,14 @@ export default function ExplorePage() {
                   text-[13px]
                   font-medium
                   text-white
-
                   transition-all
                   duration-300
-
                   hover:-translate-y-1
                   hover:rotate-[-1deg]
                   hover:shadow-xl
                   hover:shadow-[#5B8DEF]/15
-
                   active:translate-y-0
                   active:rotate-0
-
                   sm:px-5
                   sm:py-3
                   sm:text-sm
@@ -500,19 +368,18 @@ export default function ExplorePage() {
                 <span
                   className="
                     flex
-                    h-6 w-6
+                    h-6
+                    w-6
                     items-center
                     justify-center
                     rounded-full
                     bg-white/15
-
                     transition-transform
                     duration-300
-
                     group-hover:translate-x-0.5
                     group-hover:-translate-y-0.5
-
-                    sm:h-7 sm:w-7
+                    sm:h-7
+                    sm:w-7
                   "
                 >
                   <ArrowUpRight size={13} strokeWidth={1.8} />
@@ -520,9 +387,7 @@ export default function ExplorePage() {
               </Link>
             </div>
 
-            {/* ---------------------------------------------------------
-                CTA Footer
-            --------------------------------------------------------- */}
+            {/* CTA Footer */}
             <div
               className="
                 relative
@@ -534,7 +399,6 @@ export default function ExplorePage() {
                 border-t
                 border-slate-200/80
                 pt-4
-
                 sm:mt-9
                 sm:flex-row
                 sm:items-center
@@ -556,7 +420,6 @@ export default function ExplorePage() {
                     uppercase
                     tracking-[0.14em]
                     text-slate-300
-
                     sm:text-[9px]
                   "
                 >

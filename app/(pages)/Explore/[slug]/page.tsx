@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { categoryPages } from "./Categories";
+import { categories, type CategorySlug } from "./Categories";
 
 interface CategoryPageProps {
   params: Promise<{
@@ -10,13 +10,13 @@ interface CategoryPageProps {
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
 
-  const page = categoryPages[slug];
+  const category = categories.find((category) => category.slug === slug);
 
-  if (!page) {
+  if (!category) {
     notFound();
   }
 
-  const Page = page.component;
+  const Page = category.page;
 
   return <Page />;
 }
