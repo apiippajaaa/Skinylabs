@@ -1,3 +1,4 @@
+// app\(pages)\explore\[slug]\page.tsx
 import { notFound } from "next/navigation";
 import { categories, type CategorySlug } from "./Categories";
 

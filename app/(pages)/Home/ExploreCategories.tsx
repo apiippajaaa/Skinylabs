@@ -1,4 +1,6 @@
-import { categories } from "../Explore/[slug]/Categories";
+// app\(pages)\home\ExploreCategories.tsx
+
+import { categories } from "../explore/[slug]/Categories";
 import CreativeCard from "./CreativeCard";
 
 export default function ExploreCategories() {

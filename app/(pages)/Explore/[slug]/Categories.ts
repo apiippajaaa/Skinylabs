@@ -1,10 +1,14 @@
+
+// app/(pages)/explore/[slug]/Categories.ts
+
 import {
   Camera,
   Code2,
-  LayoutTemplate,
   Layers3,
+  LayoutTemplate,
   Palette,
   PenTool,
+  Smartphone,
   Sparkles,
   Video,
 } from "lucide-react";
@@ -13,10 +17,11 @@ import GraphicsPage from "./pages/Graphics";
 import BrandingPage from "./pages/Branding";
 import UIUXPage from "./pages/UIUX";
 import WebDevelopmentPage from "./pages/WebDevelopment";
+import AppDevelopmentPage from "./pages/AppDevelopment";
 import IllustrationPage from "./pages/Illustration";
 import VideoPage from "./pages/Video";
 import PhotographyPage from "./pages/Photography";
-import SocialMediaPage from "./pages/SocialMedia";
+import ContentProductionPage from "./pages/ContentProduction";
 
 export const categories = [
   {
@@ -30,6 +35,7 @@ export const categories = [
     rotate: "-rotate-3",
     page: GraphicsPage,
   },
+
   {
     slug: "branding",
     name: "Branding",
@@ -41,6 +47,7 @@ export const categories = [
     rotate: "rotate-2",
     page: BrandingPage,
   },
+
   {
     slug: "ui-ux",
     name: "UI / UX",
@@ -52,6 +59,7 @@ export const categories = [
     rotate: "-rotate-2",
     page: UIUXPage,
   },
+
   {
     slug: "web-development",
     name: "Web Development",
@@ -63,6 +71,19 @@ export const categories = [
     rotate: "rotate-3",
     page: WebDevelopmentPage,
   },
+
+  {
+    slug: "app-development",
+    name: "App Development",
+    description: "Digital products built for real-world use.",
+    icon: Smartphone,
+    accent: "bg-[#7C5CFC]",
+    hoverAccent: "group-hover:bg-[#7C5CFC]",
+    soft: "bg-[#F0EDFF]",
+    rotate: "-rotate-2",
+    page: AppDevelopmentPage,
+  },
+
   {
     slug: "illustration",
     name: "Illustration",
@@ -71,9 +92,10 @@ export const categories = [
     accent: "bg-[#35BFA4]",
     hoverAccent: "group-hover:bg-[#35BFA4]",
     soft: "bg-[#E9FAF6]",
-    rotate: "-rotate-2",
+    rotate: "rotate-2",
     page: IllustrationPage,
   },
+
   {
     slug: "video-motion",
     name: "Video & Motion",
@@ -82,30 +104,32 @@ export const categories = [
     accent: "bg-[#E85D9E]",
     hoverAccent: "group-hover:bg-[#E85D9E]",
     soft: "bg-[#FDEBF4]",
-    rotate: "rotate-2",
+    rotate: "-rotate-2",
     page: VideoPage,
   },
+
   {
     slug: "photography",
     name: "Photography",
-    description: "Visuals that capture your brand at its best.",
+    description: "Photos created to capture your brand at its best.",
     icon: Camera,
     accent: "bg-[#FF9F43]",
     hoverAccent: "group-hover:bg-[#FF9F43]",
     soft: "bg-[#FFF3E5]",
-    rotate: "-rotate-2",
+    rotate: "rotate-2",
     page: PhotographyPage,
   },
+
   {
-    slug: "social-media",
-    name: "Social Media",
-    description: "Content designed to keep your brand moving.",
+    slug: "content-production",
+    name: "Content Production",
+    description: "From ideas to content ready to share.",
     icon: LayoutTemplate,
     accent: "bg-[#222222]",
     hoverAccent: "group-hover:bg-[#222222]",
     soft: "bg-[#F1F1F1]",
-    rotate: "rotate-2",
-    page: SocialMediaPage,
+    rotate: "-rotate-2",
+    page: ContentProductionPage,
   },
 ] as const;
 
