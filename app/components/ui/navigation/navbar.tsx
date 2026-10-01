@@ -122,7 +122,7 @@ export default function Navbar() {
             <div
               className="
                 flex h-9 w-9 items-center justify-center
-                rounded-xl bg-slate-950
+                rounded-xl bg-white
                 transition-transform duration-300
                 group-hover:rotate-[-6deg]
               "
@@ -130,10 +130,10 @@ export default function Navbar() {
               <Image
                 src="/logo.svg"
                 alt="Skinylabs"
-                width={24}
-                height={24}
+                width={30}
+                height={30}
                 priority
-                className="h-6 w-6 object-contain"
+                className="h-8 w-8 object-contain"
               />
             </div>
 
