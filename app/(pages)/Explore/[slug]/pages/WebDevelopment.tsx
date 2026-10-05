@@ -2,18 +2,16 @@
 
 import Link from "next/link";
 import {
-  ArrowDown,
+  ArrowRight,
   ArrowUpRight,
   Braces,
   Check,
   Code2,
   Component,
   Cpu,
-  Cursor,
   Layers3,
   MousePointer2,
   Palette,
-  Play,
   Rocket,
   Sparkles,
   Terminal,
@@ -22,50 +20,48 @@ import { motion, useReducedMotion } from "motion/react";
 
 const capabilities = [
   {
+    number: "01",
     title: "Websites",
     description:
-      "Website yang punya karakter, responsive, cepat, dan tetap nyaman digunakan.",
+      "Website yang punya karakter, cepat, responsive, dan nyaman digunakan.",
     icon: Code2,
-    className: "lg:col-span-7 lg:row-span-2",
-    background: "bg-[#F0EFFF]",
-    accent: "text-[#6C63FF]",
-    shape: "bg-[#6C63FF]",
+    accent: "#6C63FF",
+    soft: "#F0EFFF",
   },
   {
+    number: "02",
     title: "Web Apps",
-    description: "Interface kompleks yang tetap terasa sederhana.",
+    description:
+      "Interface kompleks yang tetap terasa sederhana dan mudah dipahami.",
     icon: Layers3,
-    className: "lg:col-span-5",
-    background: "bg-[#EAF9F6]",
-    accent: "text-[#35BFA4]",
-    shape: "bg-[#35BFA4]",
+    accent: "#35BFA4",
+    soft: "#EAF9F6",
   },
   {
+    number: "03",
     title: "Components",
-    description: "UI system yang reusable dan scalable.",
+    description: "UI system reusable yang lebih konsisten dan siap berkembang.",
     icon: Component,
-    className: "lg:col-span-5",
-    background: "bg-[#FFF8DD]",
-    accent: "text-[#D19B00]",
-    shape: "bg-[#F4C430]",
+    accent: "#D19B00",
+    soft: "#FFF8DD",
   },
   {
+    number: "04",
     title: "Interactions",
-    description: "Motion kecil yang membuat interface terasa hidup.",
+    description:
+      "Motion kecil yang membuat interface terasa hidup tanpa berlebihan.",
     icon: MousePointer2,
-    className: "lg:col-span-4",
-    background: "bg-[#FFF0ED]",
-    accent: "text-[#FF6B57]",
-    shape: "bg-[#FF6B57]",
+    accent: "#FF6B57",
+    soft: "#FFF0ED",
   },
   {
+    number: "05",
     title: "Systems",
-    description: "Fondasi teknis yang siap tumbuh bersama produk.",
+    description:
+      "Fondasi teknis yang rapi, scalable, dan siap tumbuh bersama produk.",
     icon: Cpu,
-    className: "lg:col-span-8",
-    background: "bg-[#EAF2FF]",
-    accent: "text-[#5C8DFF]",
-    shape: "bg-[#5C8DFF]",
+    accent: "#5C8DFF",
+    soft: "#EAF2FF",
   },
 ];
 
@@ -78,169 +74,349 @@ const stack = [
   "Node.js",
 ];
 
+const process = [
+  {
+    number: "01",
+    title: "Discover",
+    text: "Pahami tujuan, pengguna, dan apa yang sebenarnya perlu dibuat.",
+    accent: "#FF6B57",
+  },
+  {
+    number: "02",
+    title: "Design",
+    text: "Bentuk visual, structure, dan interaction yang punya arah.",
+    accent: "#6C63FF",
+  },
+  {
+    number: "03",
+    title: "Develop",
+    text: "Ubah konsep menjadi interface yang nyata dan responsive.",
+    accent: "#35BFA4",
+  },
+  {
+    number: "04",
+    title: "Refine",
+    text: "Rapikan detail sampai semuanya terasa pas.",
+    accent: "#F4C430",
+  },
+];
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={
+        reduceMotion
+          ? false
+          : {
+              opacity: 0,
+              y: 18,
+            }
+      }
+      whileInView={
+        reduceMotion
+          ? undefined
+          : {
+              opacity: 1,
+              y: 0,
+            }
+      }
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.55,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function WebDevelopmentPage() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <main className="overflow-hidden pb-24">
+    <main className="overflow-hidden pb-10 text-neutral-950">
       {/* =====================================================
           HERO
       ====================================================== */}
-      <section className="relative px-4 pb-24 pt-12 sm:px-6 md:pb-32 md:pt-20 lg:px-8">
+      <section className="px-4 pb-14 pt-8 sm:px-6 sm:pt-12 lg:px-8 lg:pb-20">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.82fr] lg:gap-16">
             {/* LEFT */}
             <div>
               <motion.div
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-7 inline-flex items-center gap-2 rounded-full bg-[#EAF9F6] px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-neutral-800"
+                initial={
+                  shouldReduceMotion
+                    ? false
+                    : {
+                        opacity: 0,
+                        y: 10,
+                      }
+                }
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.45,
+                }}
+                className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#EAF2FF] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#5278D8]"
               >
                 <Code2 size={13} />
                 Web Development
               </motion.div>
 
               <motion.h1
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65 }}
-                className="max-w-3xl text-[clamp(3.6rem,8vw,7.5rem)] font-black leading-[0.84] tracking-[-0.075em] text-neutral-950"
+                initial={
+                  shouldReduceMotion
+                    ? false
+                    : {
+                        opacity: 0,
+                        y: 20,
+                      }
+                }
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.05,
+                }}
+                className="max-w-3xl text-[clamp(3.4rem,8vw,7rem)] font-black leading-[0.84] tracking-[-0.075em]"
               >
-                Build
+                Website yang
                 <br />
-                something
-                <br />
-                <span className="relative inline-block text-[#6C63FF]">
-                  delightful.
-                  <span className="absolute bottom-[-6px] left-[5%] h-3 w-[90%] -rotate-2 rounded-full bg-[#FF6B57]/25" />
-                </span>
+                <span className="text-[#6C63FF]">terasa hidup.</span>
               </motion.h1>
 
               <motion.p
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.12 }}
-                className="mt-8 max-w-lg text-sm leading-7 text-neutral-600 sm:text-base"
+                initial={
+                  shouldReduceMotion
+                    ? false
+                    : {
+                        opacity: 0,
+                        y: 14,
+                      }
+                }
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.15,
+                }}
+                className="mt-6 max-w-xl text-sm leading-7 text-neutral-600 sm:text-base"
               >
                 Kami mengubah ide menjadi digital experience yang cepat,
-                expressive, dan menyenangkan untuk digunakan.
+                expressive, responsive, dan menyenangkan untuk digunakan.
               </motion.p>
 
-              <div className="mt-9 flex flex-wrap items-center gap-3">
+              <div className="mt-7 flex flex-wrap gap-2.5">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-1"
+                  className="group inline-flex items-center gap-2 rounded-full bg-neutral-950 px-5 py-3 text-sm font-bold text-white transition-transform duration-300 hover:-translate-y-1"
                 >
-                  Start a project
-                  <ArrowUpRight size={16} />
+                  Mulai project
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform duration-300 group-hover:rotate-45"
+                  />
                 </Link>
 
-                <Link
-                  href="#playground"
+                <a
+                  href="#capabilities"
                   className="inline-flex items-center gap-2 rounded-full border border-neutral-900/10 px-5 py-3 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-100"
                 >
-                  Explore
-                  <ArrowDown size={15} />
-                </Link>
+                  Lihat kemampuan
+                  <ArrowRight size={15} />
+                </a>
+              </div>
+
+              {/* mini stats */}
+              <div className="mt-9 flex flex-wrap gap-x-7 gap-y-3 border-t border-neutral-900/10 pt-5">
+                <div>
+                  <p className="text-lg font-black">UI</p>
+                  <p className="text-[11px] text-neutral-500">
+                    visual & interaction
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-lg font-black">UX</p>
+                  <p className="text-[11px] text-neutral-500">
+                    structure & flow
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-lg font-black">Code</p>
+                  <p className="text-[11px] text-neutral-500">
+                    clean & scalable
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* RIGHT — UNIQUE CODE PLAYGROUND */}
+            {/* RIGHT VISUAL */}
             <motion.div
               initial={
                 shouldReduceMotion
                   ? false
-                  : { opacity: 0, scale: 0.92, rotate: 2 }
+                  : {
+                      opacity: 0,
+                      scale: 0.94,
+                      rotate: 2,
+                    }
               }
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="relative mx-auto w-full max-w-[560px]"
+              animate={{
+                opacity: 1,
+                scale: 1,
+                rotate: 0,
+              }}
+              transition={{
+                duration: 0.7,
+                delay: 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="relative mx-auto w-full max-w-[500px]"
             >
               {/* floating labels */}
-              <div className="absolute -left-3 top-8 z-20 rotate-[-7deg] rounded-full bg-[#FFF8DD] px-4 py-2 text-xs font-bold shadow-sm sm:-left-7">
+              <motion.div
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : {
+                        y: [0, -5, 0],
+                        rotate: [-5, -3, -5],
+                      }
+                }
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute -left-2 top-7 z-20 rounded-full bg-[#FFF8DD] px-3.5 py-2 text-[11px] font-bold shadow-sm sm:-left-5"
+              >
                 creative
-              </div>
+              </motion.div>
 
-              <div className="absolute -right-2 bottom-14 z-20 rotate-[7deg] rounded-full bg-[#EAF9F6] px-4 py-2 text-xs font-bold shadow-sm sm:-right-6">
+              <motion.div
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : {
+                        y: [0, 5, 0],
+                        rotate: [5, 3, 5],
+                      }
+                }
+                transition={{
+                  duration: 4.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute -right-2 bottom-10 z-20 rounded-full bg-[#EAF9F6] px-3.5 py-2 text-[11px] font-bold shadow-sm sm:-right-5"
+              >
                 functional
-              </div>
+              </motion.div>
 
               {/* browser */}
-              <div className="relative overflow-hidden rounded-[34px] border border-neutral-900/10 bg-[#171717] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
-                {/* browser top */}
-                <div className="flex items-center justify-between px-3 py-3">
+              <div className="relative rounded-[28px] bg-neutral-950 p-2.5 shadow-[0_25px_70px_rgba(0,0,0,0.12)] sm:rounded-[34px] sm:p-3">
+                <div className="flex h-9 items-center justify-between px-2 sm:h-10 sm:px-3">
                   <div className="flex gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-[#FF6B57]" />
                     <span className="h-2.5 w-2.5 rounded-full bg-[#F4C430]" />
                     <span className="h-2.5 w-2.5 rounded-full bg-[#35BFA4]" />
                   </div>
 
-                  <div className="rounded-full bg-white/10 px-4 py-1 text-[9px] text-white/40">
+                  <div className="rounded-full bg-white/10 px-3 py-1 text-[8px] text-white/40">
                     localhost:3000
                   </div>
 
-                  <div className="h-5 w-5" />
+                  <div className="w-8" />
                 </div>
 
-                {/* fake website */}
-                <div className="relative min-h-[390px] overflow-hidden rounded-[25px] bg-[#F8F7F3] p-6 sm:p-8">
+                <div className="relative min-h-[310px] overflow-hidden rounded-[21px] bg-[#F8F7F3] p-5 sm:min-h-[360px] sm:rounded-[25px] sm:p-7">
                   <div className="flex items-center justify-between">
-                    <div className="h-3 w-16 rounded-full bg-neutral-950" />
+                    <div className="h-2.5 w-14 rounded-full bg-neutral-950" />
 
-                    <div className="flex gap-2">
-                      <div className="h-2 w-8 rounded-full bg-neutral-300" />
-                      <div className="h-2 w-8 rounded-full bg-neutral-300" />
+                    <div className="flex gap-1.5">
+                      <div className="h-1.5 w-7 rounded-full bg-neutral-300" />
+                      <div className="h-1.5 w-7 rounded-full bg-neutral-300" />
                     </div>
                   </div>
 
-                  <div className="mt-14">
-                    <div className="h-5 w-24 rounded-full bg-[#6C63FF]/20" />
+                  <div className="mt-12 sm:mt-16">
+                    <div className="h-4 w-20 rounded-full bg-[#6C63FF]/20" />
 
-                    <div className="mt-4 max-w-[300px] text-4xl font-black leading-[0.9] tracking-[-0.06em] text-neutral-950">
+                    <div className="mt-3 max-w-[260px] text-3xl font-black leading-[0.9] tracking-[-0.06em] sm:text-4xl">
                       Make it
                       <br />
                       <span className="text-[#6C63FF]">interesting.</span>
                     </div>
 
-                    <div className="mt-5 h-2 w-44 rounded-full bg-neutral-200" />
-                    <div className="mt-2 h-2 w-32 rounded-full bg-neutral-200" />
+                    <div className="mt-5 space-y-2">
+                      <div className="h-1.5 w-40 rounded-full bg-neutral-200" />
+                      <div className="h-1.5 w-28 rounded-full bg-neutral-200" />
+                    </div>
 
-                    <div className="mt-7 flex gap-2">
-                      <div className="rounded-full bg-neutral-950 px-4 py-2 text-[9px] font-bold text-white">
+                    <div className="mt-6 flex gap-2">
+                      <div className="rounded-full bg-neutral-950 px-3.5 py-2 text-[8px] font-bold text-white">
                         Explore
                       </div>
 
-                      <div className="rounded-full bg-[#FFF0ED] px-4 py-2 text-[9px] font-bold">
+                      <div className="rounded-full bg-[#FFF0ED] px-3.5 py-2 text-[8px] font-bold">
                         About
                       </div>
                     </div>
                   </div>
 
-                  {/* floating component */}
+                  {/* floating visual */}
                   <motion.div
                     animate={
                       shouldReduceMotion
                         ? undefined
-                        : { y: [0, -8, 0], rotate: [2, 4, 2] }
+                        : {
+                            y: [0, -8, 0],
+                            rotate: [3, 7, 3],
+                          }
                     }
                     transition={{
                       duration: 4,
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    className="absolute bottom-7 right-7 flex h-28 w-28 rotate-2 items-center justify-center rounded-[28px] bg-[#FF6B57] text-white shadow-lg"
+                    className="absolute bottom-5 right-5 flex h-20 w-20 items-center justify-center rounded-[23px] bg-[#FF6B57] text-white shadow-lg sm:bottom-7 sm:right-7 sm:h-24 sm:w-24"
                   >
-                    <Sparkles size={32} strokeWidth={1.5} />
+                    <Sparkles
+                      size={28}
+                      strokeWidth={1.5}
+                      className="sm:h-8 sm:w-8"
+                    />
                   </motion.div>
 
-                  <div className="absolute bottom-8 left-7 h-3 w-3 rounded-full bg-[#35BFA4]" />
+                  <div className="absolute bottom-6 left-6 h-2.5 w-2.5 rounded-full bg-[#35BFA4]" />
                 </div>
               </div>
 
-              {/* decorative orbit */}
-              <div className="absolute -bottom-7 -left-7 -z-10 h-28 w-28 rounded-full border border-[#6C63FF]/20" />
-              <div className="absolute -right-8 -top-8 -z-10 h-24 w-24 rounded-full bg-[#F4C430]/30" />
+              <div className="absolute -bottom-5 -left-5 -z-10 h-20 w-20 rounded-full border border-[#6C63FF]/20" />
+              <div className="absolute -right-6 -top-6 -z-10 h-20 w-20 rounded-full bg-[#F4C430]/25" />
             </motion.div>
           </div>
         </div>
@@ -249,386 +425,436 @@ export default function WebDevelopmentPage() {
       {/* =====================================================
           MANIFESTO
       ====================================================== */}
-      <section className="px-4 py-20 sm:px-6 md:py-28 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="relative">
-            <div className="absolute -left-3 top-0 hidden text-7xl font-black text-[#FF6B57]/20 lg:block">
-              “
-            </div>
-
-            <p className="max-w-5xl text-[clamp(2rem,5vw,4.8rem)] font-bold leading-[1.02] tracking-[-0.055em] text-neutral-950">
-              Website yang bagus bukan yang paling{" "}
-              <span className="text-[#6C63FF]">ramai.</span>
-              <br />
-              Tapi yang membuat orang{" "}
-              <span className="relative inline-block">
-                ingin tinggal.
-                <span className="absolute bottom-[-4px] left-0 h-2 w-full rotate-1 rounded-full bg-[#F4C430]/60" />
+      <section className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+        <Reveal>
+          <div className="mx-auto max-w-7xl border-y border-neutral-900/10 py-8 sm:py-10">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-10">
+              <span className="shrink-0 pt-1 text-[10px] font-black uppercase tracking-[0.2em] text-[#FF6B57]">
+                01 / Approach
               </span>
-            </p>
 
-            <div className="mt-10 flex items-center gap-3">
-              <div className="h-px w-16 bg-neutral-300" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400">
-                Our approach
-              </span>
+              <p className="max-w-5xl text-[clamp(1.8rem,4vw,4rem)] font-bold leading-[1] tracking-[-0.055em]">
+                Website yang bagus bukan yang paling{" "}
+                <span className="text-[#6C63FF]">ramai.</span>{" "}
+                <span className="text-neutral-400">
+                  Tapi yang membuat orang ingin tinggal.
+                </span>
+              </p>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* =====================================================
-          PLAYGROUND
+          CAPABILITIES
       ====================================================== */}
-      <section id="playground" className="px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <section
+        id="capabilities"
+        className="scroll-mt-20 px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
+      >
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-[#35BFA4]">
-                The playground
-              </span>
+          <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+            <Reveal>
+              <div className="lg:sticky lg:top-24">
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#35BFA4]">
+                  02 / What we build
+                </span>
 
-              <h2 className="text-4xl font-bold tracking-tight text-neutral-950 sm:text-5xl">
-                What happens
-                <br />
-                <span className="text-[#FF6B57]">behind the screen.</span>
-              </h2>
-            </div>
+                <h2 className="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.05em] sm:text-5xl">
+                  Bukan cuma
+                  <br />
+                  <span className="text-[#FF6B57]">website.</span>
+                </h2>
 
-            <p className="max-w-sm text-sm leading-6 text-neutral-500">
-              Bukan cuma menulis code. Kami menyusun visual, interaction,
-              structure, dan logic menjadi satu pengalaman.
-            </p>
-          </div>
+                <p className="mt-5 max-w-sm text-sm leading-6 text-neutral-500">
+                  Dari halaman sederhana sampai web app yang kompleks, setiap
+                  bagian dirancang untuk bekerja bersama.
+                </p>
+              </div>
+            </Reveal>
 
-          <div className="grid gap-4 lg:grid-cols-12 lg:auto-rows-[220px]">
-            {capabilities.map((item, index) => {
-              const Icon = item.icon;
+            <div className="divide-y divide-neutral-900/10 border-y border-neutral-900/10">
+              {capabilities.map((item, index) => {
+                const Icon = item.icon;
 
-              return (
-                <motion.article
-                  key={item.title}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 25 }}
-                  whileInView={
-                    shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
-                  }
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ delay: index * 0.07 }}
-                  className={`group relative overflow-hidden rounded-[32px] ${item.background} ${item.className} p-7`}
-                >
-                  <div
-                    className={`absolute -right-12 -top-12 h-40 w-40 rounded-full ${item.shape} opacity-10 transition-transform duration-700 group-hover:scale-125`}
-                  />
-
-                  <div className="relative flex h-full flex-col justify-between">
-                    <div
-                      className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-white ${item.accent}`}
+                return (
+                  <Reveal key={item.title} delay={index * 0.05}>
+                    <motion.div
+                      whileHover={
+                        shouldReduceMotion
+                          ? undefined
+                          : {
+                              x: 5,
+                            }
+                      }
+                      transition={{
+                        duration: 0.25,
+                      }}
+                      className="group flex items-center gap-4 py-5 sm:gap-6 sm:py-6"
                     >
-                      <Icon size={23} strokeWidth={1.7} />
-                    </div>
+                      <div
+                        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl sm:h-12 sm:w-12"
+                        style={{
+                          backgroundColor: item.soft,
+                          color: item.accent,
+                        }}
+                      >
+                        <Icon size={20} strokeWidth={1.7} />
+                      </div>
 
-                    <div className="flex items-end justify-between gap-5">
-                      <div>
-                        <h3 className="text-2xl font-bold tracking-tight text-neutral-950">
+                      <span className="hidden w-6 shrink-0 text-[10px] font-bold text-neutral-300 sm:block">
+                        {item.number}
+                      </span>
+
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-lg font-bold tracking-tight sm:text-xl">
                           {item.title}
                         </h3>
 
-                        <p className="mt-2 max-w-md text-sm leading-6 text-neutral-600">
+                        <p className="mt-1 max-w-xl text-xs leading-5 text-neutral-500 sm:text-sm">
                           {item.description}
                         </p>
                       </div>
 
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:rotate-45">
-                        <ArrowUpRight size={15} />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-neutral-900/10 transition-all duration-300 group-hover:border-neutral-950 group-hover:bg-neutral-950 group-hover:text-white">
+                        <ArrowUpRight
+                          size={15}
+                          className="transition-transform duration-300 group-hover:rotate-45"
+                        />
                       </div>
-                    </div>
-                  </div>
-                </motion.article>
-              );
-            })}
+                    </motion.div>
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          CODE / DESIGN SPLIT
+          CODE + DESIGN
       ====================================================== */}
-      <section className="px-4 py-20 sm:px-6 md:py-28 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-2">
-          {/* CODE */}
-          <div className="overflow-hidden rounded-[36px] bg-neutral-950 p-6 text-white sm:p-8">
-            <div className="mb-8 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Terminal size={18} />
-                <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-                  Code
-                </span>
-              </div>
-
-              <span className="text-[10px] text-white/30">
-                clean / scalable
-              </span>
-            </div>
-
-            <div className="font-mono text-sm leading-8 text-white/70">
-              <div>
-                <span className="text-[#6C63FF]">const</span>{" "}
-                <span className="text-[#35BFA4]">experience</span> = {"{"}
-              </div>
-
-              <div className="pl-6">
-                <span className="text-[#FF6B57]">beautiful</span>:{" "}
-                <span className="text-[#F4C430]">true</span>,
-              </div>
-
-              <div className="pl-6">
-                <span className="text-[#FF6B57]">fast</span>:{" "}
-                <span className="text-[#F4C430]">true</span>,
-              </div>
-
-              <div className="pl-6">
-                <span className="text-[#FF6B57]">useful</span>:{" "}
-                <span className="text-[#F4C430]">true</span>,
-              </div>
-
-              <div className="pl-6">
-                <span className="text-[#FF6B57]">memorable</span>:{" "}
-                <span className="text-[#F4C430]">true</span>,
-              </div>
-
-              <div>{"}"}</div>
-            </div>
-
-            <div className="mt-10 flex items-center gap-2 text-xs text-white/40">
-              <Check size={14} className="text-[#35BFA4]" />
-              Built with intention.
-            </div>
-          </div>
-
-          {/* DESIGN */}
-          <div className="relative overflow-hidden rounded-[36px] bg-[#FFF0ED] p-6 sm:p-8">
-            <div className="mb-8 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Palette size={18} />
-                <span className="text-xs font-bold uppercase tracking-[0.18em]">
-                  Design
-                </span>
-              </div>
-
-              <Sparkles size={18} className="text-[#FF6B57]" />
-            </div>
-
-            <div className="relative min-h-[250px]">
-              <div className="absolute left-0 top-5 w-[70%] rotate-[-3deg] rounded-[26px] bg-white p-5 shadow-sm">
-                <div className="h-3 w-20 rounded-full bg-neutral-900" />
-
-                <div className="mt-6 h-4 w-40 rounded-full bg-[#6C63FF]/20" />
-
-                <div className="mt-3 h-2 w-28 rounded-full bg-neutral-200" />
-                <div className="mt-2 h-2 w-36 rounded-full bg-neutral-200" />
-
-                <div className="mt-5 h-9 w-20 rounded-full bg-neutral-950" />
-              </div>
-
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-[30px] bg-neutral-950 p-5 text-white sm:rounded-[36px] sm:p-8 lg:p-10">
+              {/* decorative */}
               <motion.div
                 animate={
                   shouldReduceMotion
                     ? undefined
-                    : { y: [0, -10, 0], rotate: [7, 10, 7] }
+                    : {
+                        rotate: [0, 8, 0],
+                        scale: [1, 1.05, 1],
+                      }
                 }
                 transition={{
-                  duration: 4,
+                  duration: 7,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute bottom-2 right-3 flex h-32 w-32 rotate-7 items-center justify-center rounded-[34px] bg-[#6C63FF] text-white shadow-lg"
-              >
-                <Braces size={40} strokeWidth={1.4} />
-              </motion.div>
+                className="absolute -right-14 -top-14 h-40 w-40 rounded-full bg-[#6C63FF]/20 blur-2xl"
+              />
 
-              <div className="absolute bottom-8 left-1/3 h-8 w-8 rotate-12 rounded-xl bg-[#F4C430]" />
+              <div className="relative grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
+                <div>
+                  <div className="flex items-center gap-2 text-[#35BFA4]">
+                    <Terminal size={16} />
+
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em]">
+                      Design × Development
+                    </span>
+                  </div>
+
+                  <h2 className="mt-5 max-w-xl text-4xl font-black leading-[0.92] tracking-[-0.05em] sm:text-5xl">
+                    Visual yang menarik.
+                    <br />
+                    <span className="text-[#6C63FF]">Code yang bekerja.</span>
+                  </h2>
+
+                  <p className="mt-5 max-w-lg text-sm leading-6 text-white/50">
+                    Design dan code bukan dua dunia terpisah. Kami menyatukan
+                    visual, structure, interaction, dan logic menjadi satu
+                    experience.
+                  </p>
+
+                  <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3 text-xs text-white/60">
+                    {["Responsive", "Accessible", "Scalable", "Performant"].map(
+                      (item) => (
+                        <span key={item} className="flex items-center gap-1.5">
+                          <Check size={13} className="text-[#35BFA4]" />
+                          {item}
+                        </span>
+                      )
+                    )}
+                  </div>
+                </div>
+
+                {/* code visual */}
+                <div className="relative">
+                  <div className="rounded-[25px] border border-white/10 bg-white/[0.04] p-5 sm:p-6">
+                    <div className="mb-5 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="h-2 w-2 rounded-full bg-[#FF6B57]" />
+                        <div className="h-2 w-2 rounded-full bg-[#F4C430]" />
+                        <div className="h-2 w-2 rounded-full bg-[#35BFA4]" />
+                      </div>
+
+                      <span className="font-mono text-[9px] text-white/20">
+                        experience.ts
+                      </span>
+                    </div>
+
+                    <div className="font-mono text-xs leading-7 text-white/50 sm:text-sm">
+                      <div>
+                        <span className="text-[#6C63FF]">const</span>{" "}
+                        <span className="text-[#35BFA4]">experience</span> ={" "}
+                        {"{"}
+                      </div>
+
+                      <div className="pl-5">
+                        <span className="text-[#FF6B57]">beautiful</span>:{" "}
+                        <span className="text-[#F4C430]">true</span>,
+                      </div>
+
+                      <div className="pl-5">
+                        <span className="text-[#FF6B57]">fast</span>:{" "}
+                        <span className="text-[#F4C430]">true</span>,
+                      </div>
+
+                      <div className="pl-5">
+                        <span className="text-[#FF6B57]">useful</span>:{" "}
+                        <span className="text-[#F4C430]">true</span>,
+                      </div>
+
+                      <div className="pl-5">
+                        <span className="text-[#FF6B57]">memorable</span>:{" "}
+                        <span className="text-[#F4C430]">true</span>,
+                      </div>
+
+                      <div>{"}"}</div>
+                    </div>
+                  </div>
+
+                  <motion.div
+                    animate={
+                      shouldReduceMotion
+                        ? undefined
+                        : {
+                            y: [0, -7, 0],
+                            rotate: [5, 8, 5],
+                          }
+                    }
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="absolute -bottom-5 -right-2 flex h-20 w-20 items-center justify-center rounded-[24px] bg-[#FF6B57] text-white shadow-xl sm:-right-4 sm:h-24 sm:w-24"
+                  >
+                    <Braces size={32} strokeWidth={1.4} />
+                  </motion.div>
+                </div>
+              </div>
             </div>
-
-            <p className="relative z-10 max-w-sm text-sm leading-6 text-neutral-600">
-              Design dan code bukan dua dunia terpisah. Keduanya bekerja bersama
-              untuk menghasilkan experience yang utuh.
-            </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* =====================================================
-          STACK
+          TOOLKIT
       ====================================================== */}
-      <section className="px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="rounded-[36px] bg-[#EAF9F6] p-7 sm:p-10 md:p-14">
-            <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-center">
-              <div>
-                <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-[#35BFA4]">
-                  The toolkit
-                </span>
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <Reveal>
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-5 border-y border-neutral-900/10 py-7 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#EAF9F6] text-[#35BFA4]">
+                  <Palette size={18} />
+                </div>
 
-                <h2 className="text-4xl font-bold leading-tight tracking-tight text-neutral-950">
-                  Small tools.
-                  <br />
-                  <span className="text-[#6C63FF]">Big possibilities.</span>
-                </h2>
+                <div>
+                  <p className="text-sm font-bold">Toolkit</p>
+                  <p className="text-xs text-neutral-500">
+                    Tools yang kami gunakan sehari-hari.
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-wrap gap-2">
                 {stack.map((item, index) => (
-                  <span
+                  <motion.span
                     key={item}
-                    className={`rounded-full bg-white px-4 py-2 text-sm font-semibold ${
-                      index % 3 === 0
-                        ? "text-[#6C63FF]"
-                        : index % 3 === 1
-                        ? "text-[#FF6B57]"
-                        : "text-[#35BFA4]"
-                    }`}
+                    initial={
+                      shouldReduceMotion
+                        ? false
+                        : {
+                            opacity: 0,
+                            scale: 0.9,
+                          }
+                    }
+                    whileInView={{
+                      opacity: 1,
+                      scale: 1,
+                    }}
+                    viewport={{
+                      once: true,
+                    }}
+                    transition={{
+                      delay: index * 0.04,
+                      duration: 0.3,
+                    }}
+                    whileHover={
+                      shouldReduceMotion
+                        ? undefined
+                        : {
+                            y: -2,
+                          }
+                    }
+                    className="rounded-full bg-neutral-100 px-3.5 py-2 text-xs font-semibold text-neutral-700 transition-colors hover:bg-[#EAF2FF] hover:text-[#6C63FF]"
                   >
                     {item}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* =====================================================
-          PROCESS — UNIQUE TIMELINE
+          PROCESS
       ====================================================== */}
-      <section className="px-4 py-20 sm:px-6 md:py-28 lg:px-8">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
-            <div>
-              <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF6B57]">
-                The workflow
-              </span>
+          <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+            <Reveal>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#FF6B57]">
+                  03 / Workflow
+                </span>
 
-              <h2 className="text-4xl font-bold leading-[0.95] tracking-tight text-neutral-950 sm:text-5xl">
-                From
-                <br />
-                <span className="text-[#6C63FF]">thought</span>
-                <br />
-                to browser.
-              </h2>
+                <h2 className="mt-3 text-4xl font-black leading-[0.9] tracking-[-0.05em] sm:text-5xl">
+                  Dari ide
+                  <br />
+                  <span className="text-[#6C63FF]">ke browser.</span>
+                </h2>
 
-              <p className="mt-6 max-w-sm text-sm leading-7 text-neutral-600">
-                Proses yang fleksibel, tapi tetap punya arah yang jelas.
-              </p>
-            </div>
+                <p className="mt-5 max-w-sm text-sm leading-6 text-neutral-500">
+                  Proses fleksibel dengan arah yang tetap jelas.
+                </p>
+              </div>
+            </Reveal>
 
-            <div className="relative">
-              <div className="absolute bottom-5 left-[27px] top-5 w-px bg-neutral-200" />
-
-              <div className="space-y-5">
-                {[
-                  {
-                    number: "01",
-                    title: "Discover",
-                    text: "Cari tahu apa yang sebenarnya perlu dibuat.",
-                    color: "bg-[#FFF0ED]",
-                  },
-                  {
-                    number: "02",
-                    title: "Design",
-                    text: "Bentuk visual, structure, dan interaction.",
-                    color: "bg-[#F0EFFF]",
-                  },
-                  {
-                    number: "03",
-                    title: "Develop",
-                    text: "Ubah semuanya menjadi interface yang nyata.",
-                    color: "bg-[#EAF9F6]",
-                  },
-                  {
-                    number: "04",
-                    title: "Refine",
-                    text: "Polish sampai setiap detail terasa tepat.",
-                    color: "bg-[#FFF8DD]",
-                  },
-                ].map((item, index) => (
+            <div className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+              {process.map((item, index) => (
+                <Reveal key={item.number} delay={index * 0.06}>
                   <motion.div
-                    key={item.number}
-                    initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
-                    whileInView={
-                      shouldReduceMotion ? undefined : { opacity: 1, x: 0 }
+                    whileHover={
+                      shouldReduceMotion
+                        ? undefined
+                        : {
+                            y: -4,
+                          }
                     }
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.08 }}
-                    className="relative flex gap-5"
+                    transition={{
+                      duration: 0.25,
+                    }}
+                    className="group border-t border-neutral-900/10 pt-5"
                   >
-                    <div
-                      className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${item.color} text-xs font-black`}
-                    >
-                      {item.number}
+                    <div className="flex items-center justify-between">
+                      <span
+                        className="text-[11px] font-black"
+                        style={{
+                          color: item.accent,
+                        }}
+                      >
+                        {item.number}
+                      </span>
+
+                      <ArrowUpRight
+                        size={15}
+                        className="text-neutral-300 transition-all duration-300 group-hover:rotate-45 group-hover:text-neutral-950"
+                      />
                     </div>
 
-                    <div className="rounded-[24px] bg-neutral-50 p-5">
-                      <h3 className="font-bold text-neutral-950">
-                        {item.title}
-                      </h3>
+                    <h3 className="mt-6 text-xl font-bold">{item.title}</h3>
 
-                      <p className="mt-1 text-sm leading-6 text-neutral-500">
-                        {item.text}
-                      </p>
-                    </div>
+                    <p className="mt-2 max-w-sm text-sm leading-6 text-neutral-500">
+                      {item.text}
+                    </p>
                   </motion.div>
-                ))}
-              </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* =====================================================
-          FINAL CTA
+          CTA
       ====================================================== */}
-      <section className="px-4 pb-8 pt-12 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[40px] bg-[#6C63FF] px-6 py-16 sm:px-10 md:py-24">
-            <div className="absolute -left-10 -top-10 h-32 w-32 rotate-12 rounded-[35px] bg-[#F4C430]" />
+      <section className="px-4 pb-4 pt-12 sm:px-6 lg:px-8">
+        <Reveal>
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] bg-[#6C63FF] px-6 py-12 sm:rounded-[40px] sm:px-10 sm:py-16 lg:px-14">
+            {/* decoration */}
+            <motion.div
+              animate={
+                shouldReduceMotion
+                  ? undefined
+                  : {
+                      rotate: [12, 18, 12],
+                      y: [0, -5, 0],
+                    }
+              }
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute -right-8 -top-8 h-28 w-28 rounded-[30px] bg-[#F4C430]"
+            />
 
-            <div className="absolute -bottom-12 right-10 h-36 w-36 rounded-full bg-[#35BFA4]" />
+            <div className="absolute -bottom-12 left-[20%] h-28 w-28 rounded-full bg-[#35BFA4]" />
 
-            <div className="absolute right-[20%] top-10 h-6 w-6 rotate-45 rounded-lg bg-[#FF6B57]" />
+            <div className="absolute right-[25%] top-10 h-5 w-5 rotate-45 rounded-md bg-[#FF6B57]" />
 
-            <div className="relative mx-auto max-w-3xl">
-              <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-full bg-white">
-                <Rocket size={21} />
+            <div className="relative grid items-end gap-8 lg:grid-cols-[1fr_auto]">
+              <div>
+                <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-white text-neutral-950">
+                  <Rocket size={18} />
+                </div>
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
+                  Punya ide?
+                </span>
+
+                <h2 className="mt-3 max-w-3xl text-[clamp(3rem,7vw,6.5rem)] font-black leading-[0.85] tracking-[-0.07em] text-white">
+                  Let&apos;s make it
+                  <br />
+                  <span className="text-[#FFF8DD]">real.</span>
+                </h2>
               </div>
 
-              <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60">
-                Ready when you are
-              </p>
-
-              <h2 className="text-5xl font-black leading-[0.9] tracking-[-0.055em] text-white sm:text-6xl md:text-8xl">
-                Let&apos;s build
-                <br />
-                something
-                <br />
-                <span className="text-[#FFF8DD]">worth using.</span>
-              </h2>
-
-              <div className="mt-10 flex flex-wrap items-center gap-3">
+              <div className="relative flex flex-col items-start gap-3 lg:items-end">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-neutral-950 transition-transform hover:-translate-y-1"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3.5 text-sm font-bold text-neutral-950 transition-transform duration-300 hover:-translate-y-1"
                 >
-                  Start a project
-                  <ArrowUpRight size={17} />
+                  Mulai ngobrol
+                  <ArrowUpRight
+                    size={17}
+                    className="transition-transform duration-300 group-hover:rotate-45"
+                  />
                 </Link>
 
-                <span className="text-sm text-white/60">
+                <span className="text-xs text-white/50">
                   No boring websites.
                 </span>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
     </main>
   );

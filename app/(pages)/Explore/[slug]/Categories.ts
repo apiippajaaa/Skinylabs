@@ -1,41 +1,36 @@
-
 // app/(pages)/explore/[slug]/Categories.ts
 
 import {
   Camera,
   Code2,
-  Layers3,
   LayoutTemplate,
-  Palette,
   PenTool,
   Smartphone,
   Sparkles,
   Video,
 } from "lucide-react";
 
-import GraphicsPage from "./pages/Graphics";
+import DesignIllustrationPage from "./pages/DesignIllustration";
 import BrandingPage from "./pages/Branding";
 import UIUXPage from "./pages/UIUX";
 import WebDevelopmentPage from "./pages/WebDevelopment";
 import AppDevelopmentPage from "./pages/AppDevelopment";
-import IllustrationPage from "./pages/Illustration";
 import VideoPage from "./pages/Video";
 import PhotographyPage from "./pages/Photography";
 import ContentProductionPage from "./pages/ContentProduction";
 
 export const categories = [
   {
-    slug: "graphic-design",
-    name: "Graphic Design",
-    description: "Visuals that make your brand stand out.",
-    icon: Palette,
+    slug: "design-illustration",
+    name: "Design & Illustration",
+    description: "Visuals, artwork, and creative designs made for your ideas.",
+    icon: PenTool,
     accent: "bg-[#FF6B57]",
     hoverAccent: "group-hover:bg-[#FF6B57]",
     soft: "bg-[#FFF0ED]",
     rotate: "-rotate-3",
-    page: GraphicsPage,
+    page: DesignIllustrationPage,
   },
-
   {
     slug: "branding",
     name: "Branding",
@@ -47,7 +42,6 @@ export const categories = [
     rotate: "rotate-2",
     page: BrandingPage,
   },
-
   {
     slug: "ui-ux",
     name: "UI / UX",
@@ -59,11 +53,10 @@ export const categories = [
     rotate: "-rotate-2",
     page: UIUXPage,
   },
-
   {
     slug: "web-development",
     name: "Web Development",
-    description: "Fast, responsive websites built to perform.",
+    description: "Websites, web apps, and digital experiences built to perform.",
     icon: Code2,
     accent: "bg-[#3B82F6]",
     hoverAccent: "group-hover:bg-[#3B82F6]",
@@ -71,7 +64,6 @@ export const categories = [
     rotate: "rotate-3",
     page: WebDevelopmentPage,
   },
-
   {
     slug: "app-development",
     name: "App Development",
@@ -83,23 +75,10 @@ export const categories = [
     rotate: "-rotate-2",
     page: AppDevelopmentPage,
   },
-
-  {
-    slug: "illustration",
-    name: "Illustration",
-    description: "Custom visuals with personality and character.",
-    icon: Layers3,
-    accent: "bg-[#35BFA4]",
-    hoverAccent: "group-hover:bg-[#35BFA4]",
-    soft: "bg-[#E9FAF6]",
-    rotate: "rotate-2",
-    page: IllustrationPage,
-  },
-
   {
     slug: "video-motion",
     name: "Video & Motion",
-    description: "Stories brought to life through motion.",
+    description: "Stories brought to life through video and motion.",
     icon: Video,
     accent: "bg-[#E85D9E]",
     hoverAccent: "group-hover:bg-[#E85D9E]",
@@ -107,7 +86,6 @@ export const categories = [
     rotate: "-rotate-2",
     page: VideoPage,
   },
-
   {
     slug: "photography",
     name: "Photography",
@@ -119,7 +97,6 @@ export const categories = [
     rotate: "rotate-2",
     page: PhotographyPage,
   },
-
   {
     slug: "content-production",
     name: "Content Production",
